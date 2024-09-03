@@ -34,23 +34,23 @@ namespace CozmicVoid.ExampleContent
         public override void AI()
         {
             base.AI();
-            Projectile.velocity = Projectile.velocity.RotatedBy(MathHelper.PiOver4 / 64);
+            Projectile.velocity = Projectile.velocity.RotatedBy(MathHelper.PiOver2 / 24);
         }
         private Color ColorFunction(float p)
         {
-            return Color.Lerp(Color.White, Color.Transparent, Easing.OutExpo(p, 6));
+            return Color.Lerp(Color.DarkSlateBlue, Color.Transparent, Easing.OutExpo(p, 6));
         }
 
         private float WidthFunction(float p)
         {
-            return MathHelper.Lerp(186, 0, Easing.OutExpo(p, 6));
+            return MathHelper.Lerp(10, 0, Easing.OutExpo(p, 6));
         }
 
         public override bool PreDraw(ref Color lightColor)
         {
             SimpleTrailShader simpleTrailShader = SimpleTrailShader.Instance;
-            simpleTrailShader.TrailingTexture = TrailRegistry.StarTrail;
-            simpleTrailShader.SecondaryTrailingTexture = TrailRegistry.StarTrail;
+            simpleTrailShader.TrailingTexture = TrailRegistry.CrystalTrail;
+            simpleTrailShader.SecondaryTrailingTexture = TrailRegistry.CrystalTrail;
             SpriteBatch spriteBatch = Main.spriteBatch;
             TrailDrawer.Draw(spriteBatch,
                 Projectile.oldPos, 
