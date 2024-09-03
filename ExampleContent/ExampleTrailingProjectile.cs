@@ -19,7 +19,7 @@ namespace CozmicVoid.ExampleContent
         {
             base.SetStaticDefaults();
             ProjectileID.Sets.TrailCacheLength[Type] = 30;
-            ProjectileID.Sets.TrailingMode[Type] = 4;
+            ProjectileID.Sets.TrailingMode[Type] = 2;
         }
 
         public override void SetDefaults()
@@ -38,12 +38,12 @@ namespace CozmicVoid.ExampleContent
         }
         private Color ColorFunction(float p)
         {
-            return Color.Lerp(Color.White, Main.DiscoColor, p);
+            return Color.Lerp(Color.White, Color.Transparent, p);
         }
 
         private float WidthFunction(float p)
         {
-            return MathHelper.Lerp(186, 167, Easing.OutExpo(p));
+            return MathHelper.Lerp(186, 0, Easing.OutExpo(p, 6));
         }
 
         public override bool PreDraw(ref Color lightColor)
