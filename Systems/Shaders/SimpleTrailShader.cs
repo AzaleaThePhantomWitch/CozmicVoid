@@ -1,18 +1,17 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
+using System;
 using Terraria;
 
 namespace CozmicVoid.Systems.Shaders
 {
-    internal class SimpleTrailShader : BaseShader
+    internal class SimpleTrailShader : IShader
     {
         private static SimpleTrailShader _instance;
         public SimpleTrailShader()
         {
             Effect = ShaderRegistry.SimpleTrailEffect.Shader;
-            SamplerState = SamplerState.PointWrap;
-            BlendState = BlendState.Additive;
             PrimaryColor = Color.White;
             SecondaryColor = Color.White;
             Speed = 5;
@@ -28,13 +27,14 @@ namespace CozmicVoid.Systems.Shaders
             }
         }
 
+        public Effect Effect { get; set; }
         public Asset<Texture2D> TrailingTexture { get; set; }
         public Asset<Texture2D> SecondaryTrailingTexture { get; set; }
         public Color PrimaryColor { get; set; }
         public Color SecondaryColor { get; set; }
         public float Speed { get; set; }
 
-        public override void Apply()
+        public void Apply()
         {
             Effect.Parameters["transformMatrix"].SetValue(TrailDrawer.WorldViewPoint2);
             Effect.Parameters["primaryColor"].SetValue(PrimaryColor.ToVector3());
