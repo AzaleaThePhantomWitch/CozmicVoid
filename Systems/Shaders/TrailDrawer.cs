@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Graphics.PackedVector;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Terraria;
 
 namespace CozmicVoid.Systems.Shaders
@@ -89,14 +90,11 @@ namespace CozmicVoid.Systems.Shaders
             Vector2[] oldPos,
             float[] oldRot, 
             Func<float, Color> colorFunc, 
-            Func<float, Vector2> widthFunc,
+            Func<float, float> widthFunc,
             Effect? effect = null,
             Vector2? framing = null,
             Vector2? offset = null)
         {
-            GraphicsDevice graphicsDevice = Main.graphics.GraphicsDevice;
-            List<VertexPositionColorTexture> vertices = new List<VertexPositionColorTexture>();
-
             //Apply passes
             if(effect != null)
             {
@@ -104,13 +102,16 @@ namespace CozmicVoid.Systems.Shaders
             }
 
             Vector2 o = offset == null ? Vector2.Zero : (Vector2)offset;
-            Vector2 f = framing == null ? Vector2.Zero : (Vector2)framing;
+
+
+            int maxPointCount = oldPos.Length;
+            var vertices = new List<VertexPositionColorTexture>();
             oldPos = RemoveZeros(oldPos, o);
             float length = oldPos.Length;
             for(int i = 0; i < oldPos.Length; i++)
             {
                 float uv = (float)i / length;
-                Vector2 width = widthFunc(uv);
+                Vector2 width = widthFunc(uv) * Vector2.One;
                 Color color = colorFunc(uv);
                 Vector2 pos = oldPos[i];  
   
@@ -122,6 +123,13 @@ namespace CozmicVoid.Systems.Shaders
                 vertices.Add(new VertexPositionColorTexture(finalBottom, color, new Vector2(uv, 1)));
             }
 
+            DrawPrims(vertices);
+        }
+
+
+        private static void DrawPrims(List<VertexPositionColorTexture> vertices)
+        {
+            GraphicsDevice graphicsDevice = Main.graphics.GraphicsDevice;
             BlendState originalBlendState = graphicsDevice.BlendState;
             CullMode oldCullMode = graphicsDevice.RasterizerState.CullMode;
             SamplerState originalSamplerState = graphicsDevice.SamplerStates[0];
@@ -129,10 +137,10 @@ namespace CozmicVoid.Systems.Shaders
             graphicsDevice.RasterizerState.CullMode = CullMode.None;
             graphicsDevice.BlendState = BlendState.Additive;
             graphicsDevice.SamplerStates[0] = SamplerState.PointWrap;
-            
+
             graphicsDevice.DrawUserPrimitives(
                 PrimitiveType.TriangleStrip, vertices.ToArray(), 0, vertices.Count / 2);
-           
+
             graphicsDevice.RasterizerState.CullMode = oldCullMode;
             graphicsDevice.BlendState = originalBlendState;
             graphicsDevice.SamplerStates[0] = originalSamplerState;
@@ -142,7 +150,7 @@ namespace CozmicVoid.Systems.Shaders
             Vector2[] oldPos,
             float[] oldRot,
             Func<float, Color> colorFunc,
-            Func<float, Vector2> widthFunc,
+            Func<float, float> widthFunc,
             IShader shader,
             Vector2? framing = null,
             Vector2? offset = null)
