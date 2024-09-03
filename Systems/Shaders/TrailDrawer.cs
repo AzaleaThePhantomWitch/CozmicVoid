@@ -1,7 +1,6 @@
 ﻿using CozmicVoid.Systems.MathHelpers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Graphics.PackedVector;
 using System;
 using System.Collections.Generic;
 using Terraria;
@@ -85,18 +84,32 @@ namespace CozmicVoid.Systems.Shaders
             return valid.ToArray();
         }
 
+        private static void GetTrailPoints(Vector2[] oldPos, out Vector2[] trailingPoints)
+        {
+            float smoothFactor = 8;
+            List<Vector2> points = new List<Vector2>();
+            for (int i = 0; i < oldPos.Length - 1; i++)
+            {
+                Vector2 current = oldPos[i];
+                Vector2 next = oldPos[i + 1];
+                for(float  j = 0;  j < smoothFactor; j++)
+                {
+                    float p = j / smoothFactor;
+                    Vector2 smoothedPoint = Vector2.Lerp(current, next, p);
+                    points.Add(smoothedPoint);
+                }
+            }
+            trailingPoints = points.ToArray();
+        }
+
         public static void Draw(SpriteBatch spriteBatch, 
             Vector2[] oldPos,
             float[] oldRot, 
             Func<float, Color> colorFunc, 
-            Func<float, Vector2> widthFunc,
+            Func<float, float> widthFunc,
             Effect? effect = null,
-            Vector2? framing = null,
             Vector2? offset = null)
         {
-            GraphicsDevice graphicsDevice = Main.graphics.GraphicsDevice;
-            List<VertexPositionColorTexture> vertices = new List<VertexPositionColorTexture>();
-
             //Apply passes
             if(effect != null)
             {
@@ -104,24 +117,36 @@ namespace CozmicVoid.Systems.Shaders
             }
 
             Vector2 o = offset == null ? Vector2.Zero : (Vector2)offset;
-            Vector2 f = framing == null ? Vector2.Zero : (Vector2)framing;
+
+
+            var vertices = new List<VertexPositionColorTexture>();
+
             oldPos = RemoveZeros(oldPos, o);
-            float length = oldPos.Length;
-            for(int i = 0; i < oldPos.Length; i++)
+            GetTrailPoints(oldPos, out Vector2[] trailingPoints);
+            for(int i = 0; i < trailingPoints.Length; i++)
             {
-                float uv = (float)i / length;
-                Vector2 width = widthFunc(uv);
+                float length = trailingPoints.Length;
+                float uv = i / length;
+    
+                Vector2 width = widthFunc(uv) * Vector2.One;
                 Color color = colorFunc(uv);
-                Vector2 pos = oldPos[i];  
+                Vector2 pos = trailingPoints[i];  
   
-                Vector2 top = pos + GetRotation(oldPos, i) * width;
-                Vector2 bottom = pos - GetRotation(oldPos, i) * width;
+                Vector2 top = pos + GetRotation(trailingPoints, i) * width;
+                Vector2 bottom = pos - GetRotation(trailingPoints, i) * width;
                 Vector3 finalTop = top.ToVector3();
                 Vector3 finalBottom = bottom.ToVector3();
                 vertices.Add(new VertexPositionColorTexture(finalTop, color, new Vector2(uv, 0)));
                 vertices.Add(new VertexPositionColorTexture(finalBottom, color, new Vector2(uv, 1)));
             }
 
+            DrawPrims(vertices);
+        }
+
+
+        private static void DrawPrims(List<VertexPositionColorTexture> vertices)
+        {
+            GraphicsDevice graphicsDevice = Main.graphics.GraphicsDevice;
             BlendState originalBlendState = graphicsDevice.BlendState;
             CullMode oldCullMode = graphicsDevice.RasterizerState.CullMode;
             SamplerState originalSamplerState = graphicsDevice.SamplerStates[0];
@@ -129,10 +154,10 @@ namespace CozmicVoid.Systems.Shaders
             graphicsDevice.RasterizerState.CullMode = CullMode.None;
             graphicsDevice.BlendState = BlendState.Additive;
             graphicsDevice.SamplerStates[0] = SamplerState.PointWrap;
-            
+
             graphicsDevice.DrawUserPrimitives(
                 PrimitiveType.TriangleStrip, vertices.ToArray(), 0, vertices.Count / 2);
-           
+
             graphicsDevice.RasterizerState.CullMode = oldCullMode;
             graphicsDevice.BlendState = originalBlendState;
             graphicsDevice.SamplerStates[0] = originalSamplerState;
@@ -142,13 +167,12 @@ namespace CozmicVoid.Systems.Shaders
             Vector2[] oldPos,
             float[] oldRot,
             Func<float, Color> colorFunc,
-            Func<float, Vector2> widthFunc,
+            Func<float, float> widthFunc,
             IShader shader,
-            Vector2? framing = null,
             Vector2? offset = null)
         {
             shader.Apply();
-            Draw(spriteBatch, oldPos, oldRot, colorFunc, widthFunc, shader.Effect, framing, offset);
+            Draw(spriteBatch, oldPos, oldRot, colorFunc, widthFunc, shader.Effect, offset);
         }
     }
 }

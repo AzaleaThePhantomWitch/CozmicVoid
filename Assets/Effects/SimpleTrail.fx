@@ -1,7 +1,9 @@
 ﻿matrix transformMatrix;
 texture trailTexture;
+texture secondaryTrailTexture;
 float3 primaryColor;
 float3 secondaryColor;
+float time;
 
 sampler2D trailTex = sampler_state
 {
@@ -13,6 +15,15 @@ sampler2D trailTex = sampler_state
     AddressV = wrap;
 };
 
+sampler2D secondaryTrailTex = sampler_state
+{
+    texture = <secondaryTrailTexture>;
+    magfilter = LINEAR;
+    minfilter = LINEAR;
+    mipfilter = LINEAR;
+    AddressU = wrap;
+    AddressV = wrap;
+};
 struct VertexShaderInput
 {
     float4 Position : POSITION0;
@@ -41,9 +52,13 @@ float4 PixelShaderFunction(VertexShaderOutput input) : COLOR0
 {
     float4 color = input.Color;
     float2 coords = input.TextureCoordinates;
+    float2 offset = float2(time * -0.05, 0.0);
+    float2 offset2 = float2(time * -0.025, 0.0);
     
     //Sample the image
-    return tex2D(trailTex, coords) * color;
+    float4 sample = tex2D(trailTex, coords + offset);
+    float4 secondarySample = tex2D(secondaryTrailTex, coords + offset2);
+    return (sample + secondarySample * 0.5) * color;
 }
 
 technique Technique1

@@ -19,7 +19,7 @@ namespace CozmicVoid.ExampleContent
         {
             base.SetStaticDefaults();
             ProjectileID.Sets.TrailCacheLength[Type] = 30;
-            ProjectileID.Sets.TrailingMode[Type] = 4;
+            ProjectileID.Sets.TrailingMode[Type] = 2;
         }
 
         public override void SetDefaults()
@@ -34,22 +34,23 @@ namespace CozmicVoid.ExampleContent
         public override void AI()
         {
             base.AI();
-            Projectile.velocity = Projectile.velocity.RotatedBy(MathHelper.PiOver4 / 16);
+            Projectile.velocity = Projectile.velocity.RotatedBy(MathHelper.PiOver4 / 64);
         }
         private Color ColorFunction(float p)
         {
-            return Color.Lerp(Main.DiscoColor, Color.Transparent, p);
+            return Color.Lerp(Color.White, Color.Transparent, Easing.OutExpo(p, 6));
         }
 
-        private Vector2 WidthFunction(float p)
+        private float WidthFunction(float p)
         {
-            return Vector2.Lerp(Vector2.One * 64, Vector2.Zero, Easing.OutExpo(p));
+            return MathHelper.Lerp(186, 0, Easing.OutExpo(p, 6));
         }
 
         public override bool PreDraw(ref Color lightColor)
         {
             SimpleTrailShader simpleTrailShader = SimpleTrailShader.Instance;
-            simpleTrailShader.TrailingTexture = TrailRegistry.SpikyTrail;
+            simpleTrailShader.TrailingTexture = TrailRegistry.StarTrail;
+            simpleTrailShader.SecondaryTrailingTexture = TrailRegistry.StarTrail;
             SpriteBatch spriteBatch = Main.spriteBatch;
             TrailDrawer.Draw(spriteBatch,
                 Projectile.oldPos, 
