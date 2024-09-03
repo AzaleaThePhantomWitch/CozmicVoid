@@ -107,42 +107,19 @@ namespace CozmicVoid.Systems.Shaders
             Vector2 f = framing == null ? Vector2.Zero : (Vector2)framing;
             oldPos = RemoveZeros(oldPos, o);
             float length = oldPos.Length;
-            for(int i = 0; i < oldPos.Length-1; i++)
+            for(int i = 0; i < oldPos.Length; i++)
             {
-                
-                float uv = i / length;
-                float uv2 = (i + 1) / length;
-                Vector2 width = widthFunc(uv);
-                Vector2 width2 = widthFunc(uv2);
-                Vector2 pos1 = oldPos[i];
-                Vector2 pos2 = oldPos[i + 1];
-                Vector2 off1 = GetRotation(oldPos,i) * width;
-                Vector2 off2 = GetRotation(oldPos,i + 1) * width2;
-                float coord1 = off1.Length() < off2.Length() ? 1 : 0;
-                float coord2 = off1.Length() < off2.Length() ? 0 : 1;
-                Color col1 = colorFunc(uv);
-                Color col2 = colorFunc(uv2);
-                vertices.Add(new VertexPositionColorTexture(new Vector3(pos1 + off1, 0f), col1, new Vector2((uv) , coord1)));
-                vertices.Add(new VertexPositionColorTexture(new Vector3(pos1 - off1, 0f), col1, new Vector2((uv) , coord2)));
-                vertices.Add(new VertexPositionColorTexture(new Vector3(pos2 + off2, 0f), col2, new Vector2((uv2) , coord1)));
-                vertices.Add(new VertexPositionColorTexture(new Vector3(pos2 + off2, 0f), col2, new Vector2((uv2) , coord1)));
-                vertices.Add(new VertexPositionColorTexture(new Vector3(pos2 - off2, 0f), col2, new Vector2((uv2), coord2)));
-                vertices.Add(new VertexPositionColorTexture(new Vector3(pos1 - off1, 0f), col1, new Vector2((uv) , coord2)));
-                
-                
-                /*
                 float uv = (float)i / length;
                 Vector2 width = widthFunc(uv);
                 Color color = colorFunc(uv);
-                Vector2 pos = oldPos[i];
-        
+                Vector2 pos = oldPos[i];  
   
                 Vector2 top = pos + GetRotation(oldPos, i) * width;
                 Vector2 bottom = pos - GetRotation(oldPos, i) * width;
                 Vector3 finalTop = top.ToVector3();
                 Vector3 finalBottom = bottom.ToVector3();
                 vertices.Add(new VertexPositionColorTexture(finalTop, color, new Vector2(uv, 0)));
-                vertices.Add(new VertexPositionColorTexture(finalBottom, color, new Vector2(uv, 1)));*/
+                vertices.Add(new VertexPositionColorTexture(finalBottom, color, new Vector2(uv, 1)));
             }
 
             BlendState originalBlendState = graphicsDevice.BlendState;
@@ -154,7 +131,7 @@ namespace CozmicVoid.Systems.Shaders
             graphicsDevice.SamplerStates[0] = SamplerState.PointWrap;
             
             graphicsDevice.DrawUserPrimitives(
-                PrimitiveType.TriangleList, vertices.ToArray(), 0, vertices.Count / 3);
+                PrimitiveType.TriangleStrip, vertices.ToArray(), 0, vertices.Count / 2);
            
             graphicsDevice.RasterizerState.CullMode = oldCullMode;
             graphicsDevice.BlendState = originalBlendState;
