@@ -1,3 +1,4 @@
+using CozmicVoid.ExampleContent;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -24,6 +25,8 @@ namespace CozmicVoid.Content.Items
 			Item.rare = ItemRarityID.Blue;
 			Item.UseSound = SoundID.Item1;
 			Item.autoReuse = true;
+			Item.shootSpeed = 5;
+			Item.shoot = ModContent.ProjectileType<ExampleTrailingProjectile>();
 		}
 
 		public override void AddRecipes()

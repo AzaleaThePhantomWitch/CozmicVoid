@@ -2,7 +2,7 @@
 
 Items: {
 	Real: {
-		DisplayName: "Real"
+		DisplayName: Real
 		Tooltip:
 			'''
 			Template of an item
@@ -11,3 +11,5 @@ Items: {
 			'''
 	}
 }
+
+Projectiles.ExampleTrailingProjectile.DisplayName: Example Trailing Projectile

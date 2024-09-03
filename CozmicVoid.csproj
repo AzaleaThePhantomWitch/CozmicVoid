@@ -7,10 +7,15 @@
 	<PropertyGroup>
 		
 	</PropertyGroup>
+	<ItemGroup>
+	  <None Remove="Assets\Effects\SimpleTrail.fx" />
+	  <None Remove="ExampleContent\Real.png" />
+	</ItemGroup>
 
 	<!-- References -->
 	<ItemGroup>
-		
+	  <Folder Include="Assets\Textures\" />
+	  <Folder Include="Assets\Sounds\" />
 	</ItemGroup>
 
 </Project>
