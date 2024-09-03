@@ -38,7 +38,7 @@ namespace CozmicVoid.ExampleContent
         }
         private Color ColorFunction(float p)
         {
-            return Color.Lerp(Color.White, Color.Transparent, p);
+            return Color.Lerp(Color.White, Color.Transparent, Easing.OutExpo(p, 6));
         }
 
         private float WidthFunction(float p)
