@@ -1,10 +1,8 @@
 ﻿using CozmicVoid.Systems.MathHelpers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Graphics.PackedVector;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Terraria;
 
 namespace CozmicVoid.Systems.Shaders
@@ -110,7 +108,6 @@ namespace CozmicVoid.Systems.Shaders
             Func<float, Color> colorFunc, 
             Func<float, float> widthFunc,
             Effect? effect = null,
-            Vector2? framing = null,
             Vector2? offset = null)
         {
             //Apply passes
@@ -129,7 +126,7 @@ namespace CozmicVoid.Systems.Shaders
             for(int i = 0; i < trailingPoints.Length; i++)
             {
                 float length = trailingPoints.Length;
-                float uv = (float)i / length;
+                float uv = i / length;
     
                 Vector2 width = widthFunc(uv) * Vector2.One;
                 Color color = colorFunc(uv);
@@ -172,11 +169,10 @@ namespace CozmicVoid.Systems.Shaders
             Func<float, Color> colorFunc,
             Func<float, float> widthFunc,
             IShader shader,
-            Vector2? framing = null,
             Vector2? offset = null)
         {
             shader.Apply();
-            Draw(spriteBatch, oldPos, oldRot, colorFunc, widthFunc, shader.Effect, framing, offset);
+            Draw(spriteBatch, oldPos, oldRot, colorFunc, widthFunc, shader.Effect, offset);
         }
     }
 }
