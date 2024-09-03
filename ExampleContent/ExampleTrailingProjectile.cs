@@ -55,7 +55,7 @@ namespace CozmicVoid.ExampleContent
                 Projectile.oldPos, 
                 Projectile.oldRot, 
                 ColorFunction,
-                WidthFunction, simpleTrailShader, offset: new Vector2(20, 20));
+                WidthFunction, simpleTrailShader, offset: new Vector2(Projectile.width / 2, Projectile.height / 2));
             return base.PreDraw(ref lightColor);
         }
     }
