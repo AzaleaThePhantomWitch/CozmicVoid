@@ -36,9 +36,10 @@ namespace CozmicVoid.ExampleContent
             base.AI();
             Projectile.velocity = Projectile.velocity.RotatedBy(MathHelper.PiOver4 / 64);
         }
+
         private Color ColorFunction(float p)
         {
-            return Color.Lerp(Color.White, Color.Transparent, Easing.OutExpo(p, 6));
+            return Color.Lerp(new Color(255, 255, 255, 0), new Color(0, 0, 0, 0), Easing.OutExpo(p, 6));
         }
 
         private float WidthFunction(float p)
@@ -51,6 +52,7 @@ namespace CozmicVoid.ExampleContent
             SimpleTrailShader simpleTrailShader = SimpleTrailShader.Instance;
             simpleTrailShader.TrailingTexture = TrailRegistry.StarTrail;
             simpleTrailShader.SecondaryTrailingTexture = TrailRegistry.StarTrail;
+            simpleTrailShader.BlendState = BlendState.AlphaBlend;
             SpriteBatch spriteBatch = Main.spriteBatch;
             TrailDrawer.Draw(spriteBatch,
                 Projectile.oldPos, 
