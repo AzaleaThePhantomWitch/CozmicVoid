@@ -25,7 +25,7 @@ namespace CozmicVoid.Content.Items
 			Item.rare = ItemRarityID.Blue;
 			Item.UseSound = SoundID.Item1;
 			Item.autoReuse = true;
-			Item.shootSpeed = 5;
+			Item.shootSpeed = 15;
 			Item.shoot = ModContent.ProjectileType<ExampleTrailingProjectile>();
 		}
 

@@ -1,4 +1,5 @@
-﻿using CozmicVoid.Systems.Shaders;
+﻿using CozmicVoid.Systems.MathHelpers;
+using CozmicVoid.Systems.Shaders;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -30,6 +31,11 @@ namespace CozmicVoid.ExampleContent
             Projectile.timeLeft = 300;     
         }
 
+        public override void AI()
+        {
+            base.AI();
+            Projectile.velocity = Projectile.velocity.RotatedBy(MathHelper.PiOver4 / 16);
+        }
         private Color ColorFunction(float p)
         {
             return Color.Lerp(Main.DiscoColor, Color.Transparent, p);
@@ -37,7 +43,7 @@ namespace CozmicVoid.ExampleContent
 
         private Vector2 WidthFunction(float p)
         {
-            return Vector2.One  *  128;
+            return Vector2.Lerp(Vector2.One * 64, Vector2.Zero, Easing.OutExpo(p));
         }
 
         public override bool PreDraw(ref Color lightColor)
@@ -49,7 +55,7 @@ namespace CozmicVoid.ExampleContent
                 Projectile.oldPos, 
                 Projectile.oldRot, 
                 ColorFunction,
-                WidthFunction, simpleTrailShader);
+                WidthFunction, simpleTrailShader, offset: new Vector2(20, 20));
             return base.PreDraw(ref lightColor);
         }
     }
