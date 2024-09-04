@@ -8,7 +8,15 @@
 		
 	</PropertyGroup>
 	<ItemGroup>
+	  <None Remove="Assets\Effects\BlendTrail.fx" />
+	  <None Remove="Assets\Effects\Clouds.fx" />
+	  <None Remove="Assets\Effects\CloudsDesert.fx" />
+	  <None Remove="Assets\Effects\CloudsDesertNight.fx" />
+	  <None Remove="Assets\Effects\CloudsFront.fx" />
 	  <None Remove="Assets\Effects\SimpleTrail.fx" />
+	  <None Remove="Assets\Effects\Water.fx" />
+	  <None Remove="Assets\Effects\WaterBasic.fx" />
+	  <None Remove="Assets\Textures\Empty.png" />
 	  <None Remove="Assets\Textures\GlowTrail.png" />
 	  <None Remove="ExampleContent\Real.png" />
 	</ItemGroup>
