@@ -29,53 +29,53 @@ namespace CozmicVoid
             {
     
                 Main.instance.LoadTiles(TileID.Dirt);
-                TextureAssets.Tile[TileID.Dirt] = ModContent.Request<Texture2D>("CozmicVoid/Textures/DirtRE");
+                TextureAssets.Tile[TileID.Dirt] = ModContent.Request<Texture2D>("CozmicVoid/TileTextures/DirtRE");
 
                 Main.instance.LoadTiles(TileID.IceBlock);
-                TextureAssets.Tile[TileID.IceBlock] = ModContent.Request<Texture2D>("CozmicVoid/Textures/IceRE");
+                TextureAssets.Tile[TileID.IceBlock] = ModContent.Request<Texture2D>("CozmicVoid/TileTextures/IceRE");
 
                 Main.instance.LoadTiles(TileID.SnowBlock);
-                TextureAssets.Tile[TileID.SnowBlock] = ModContent.Request<Texture2D>("CozmicVoid/Textures/SnowRE");
+                TextureAssets.Tile[TileID.SnowBlock] = ModContent.Request<Texture2D>("CozmicVoid/TileTextures/SnowRE");
 
                 Main.instance.LoadTiles(TileID.Stone);
-                TextureAssets.Tile[TileID.Stone] = ModContent.Request<Texture2D>("CozmicVoid/Textures/StoneRE");
+                TextureAssets.Tile[TileID.Stone] = ModContent.Request<Texture2D>("CozmicVoid/TileTextures/StoneRE");
 
                 Main.instance.LoadTiles(TileID.Grass);
-                TextureAssets.Tile[TileID.Grass] = ModContent.Request<Texture2D>("CozmicVoid/Textures/GrassRE");
+                TextureAssets.Tile[TileID.Grass] = ModContent.Request<Texture2D>("CozmicVoid/TileTextures/GrassRE");
 
 
                 Main.instance.LoadTiles(TileID.ClayBlock);
-                TextureAssets.Tile[TileID.ClayBlock] = ModContent.Request<Texture2D>("CozmicVoid/Textures/ClayRE");
+                TextureAssets.Tile[TileID.ClayBlock] = ModContent.Request<Texture2D>("CozmicVoid/TileTextures/ClayRE");
 
                 Main.instance.LoadTiles(TileID.Sand);
-                TextureAssets.Tile[TileID.Sand] = ModContent.Request<Texture2D>("CozmicVoid/Textures/SandRE");
+                TextureAssets.Tile[TileID.Sand] = ModContent.Request<Texture2D>("CozmicVoid/TileTextures/SandRE");
 
                 Main.instance.LoadTiles(TileID.HardenedSand);
-                TextureAssets.Tile[TileID.HardenedSand] = ModContent.Request<Texture2D>("CozmicVoid/Textures/HardSandRE");
+                TextureAssets.Tile[TileID.HardenedSand] = ModContent.Request<Texture2D>("CozmicVoid/TileTextures/HardSandRE");
 
                 Main.instance.LoadTiles(TileID.Sandstone);
-                TextureAssets.Tile[TileID.Sandstone] = ModContent.Request<Texture2D>("CozmicVoid/Textures/StoneSandRE");
+                TextureAssets.Tile[TileID.Sandstone] = ModContent.Request<Texture2D>("CozmicVoid/TileTextures/StoneSandRE");
 
                 Main.instance.LoadTiles(TileID.Mud);
-                TextureAssets.Tile[TileID.Mud] = ModContent.Request<Texture2D>("CozmicVoid/Textures/MudRE");
+                TextureAssets.Tile[TileID.Mud] = ModContent.Request<Texture2D>("CozmicVoid/TileTextures/MudRE");
 
                 Main.instance.LoadTiles(TileID.CrimsonGrass);
-                TextureAssets.Tile[TileID.CrimsonGrass] = ModContent.Request<Texture2D>("CozmicVoid/Textures/CrimGrassRE");
+                TextureAssets.Tile[TileID.CrimsonGrass] = ModContent.Request<Texture2D>("CozmicVoid/TileTextures/CrimGrassRE");
 
                 Main.instance.LoadTiles(TileID.JungleGrass);
-                TextureAssets.Tile[TileID.JungleGrass] = ModContent.Request<Texture2D>("CozmicVoid/Textures/MudGrassRE");
+                TextureAssets.Tile[TileID.JungleGrass] = ModContent.Request<Texture2D>("CozmicVoid/TileTextures/MudGrassRE");
 
                 Main.instance.LoadTiles(TileID.CorruptGrass);
-                TextureAssets.Tile[TileID.CorruptGrass] = ModContent.Request<Texture2D>("CozmicVoid/Textures/CrorpGrassRE");
+                TextureAssets.Tile[TileID.CorruptGrass] = ModContent.Request<Texture2D>("CozmicVoid/TileTextures/CrorpGrassRE");
 
                 Main.instance.LoadTiles(TileID.Crimstone);
-                TextureAssets.Tile[TileID.Crimstone] = ModContent.Request<Texture2D>("CozmicVoid/Textures/CrimStoneRE");
+                TextureAssets.Tile[TileID.Crimstone] = ModContent.Request<Texture2D>("CozmicVoid/TileTextures/CrimStoneRE");
 
                 Main.instance.LoadTiles(TileID.WoodBlock);
-                TextureAssets.Tile[TileID.WoodBlock] = ModContent.Request<Texture2D>("CozmicVoid/Textures/WoodRE");
+                TextureAssets.Tile[TileID.WoodBlock] = ModContent.Request<Texture2D>("CozmicVoid/TileTextures/WoodRE");
 
                 Main.instance.LoadTiles(TileID.GrayBrick);
-                TextureAssets.Tile[TileID.GrayBrick] = ModContent.Request<Texture2D>("CozmicVoid/Textures/StoneBrickRE");
+                TextureAssets.Tile[TileID.GrayBrick] = ModContent.Request<Texture2D>("CozmicVoid/TileTextures/StoneBrickRE");
 
             }
             base.Load();
