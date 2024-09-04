@@ -1,4 +1,5 @@
-﻿using CozmicVoid.Systems.MathHelpers;
+﻿using CozmicVoid.Dusts;
+using CozmicVoid.Systems.MathHelpers;
 using CozmicVoid.Systems.Shaders;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -30,7 +31,18 @@ namespace CozmicVoid.ExampleContent
             Projectile.penetrate = -1;
             Projectile.timeLeft = 300;     
         }
+        public override void OnKill(int timeLeft)
+        {
+            for (int i = 0; i < 8; i++)
+            {
+                Dust.NewDustPerfect(Projectile.Center, ModContent.DustType<CrystalDust>(), (Vector2.One * Main.rand.Next(1, 3)).RotatedByRandom(19.0), 0, Color.DeepSkyBlue, 0.9f).noGravity = true;
+            }
+            for (int i = 0; i < 4; i++)
+            {
+                Dust.NewDustPerfect(Projectile.Center, ModContent.DustType<TSmokeDust>(), (Vector2.One * Main.rand.Next(1, 5)).RotatedByRandom(19.0), 0, Color.AliceBlue, 0.9f).noGravity = true;
+            }
 
+        }
         public override void AI()
         {
             base.AI();
@@ -38,25 +50,28 @@ namespace CozmicVoid.ExampleContent
         }
         private Color ColorFunction(float p)
         {
-            return Color.Lerp(Color.DarkSlateBlue, Color.Transparent, Easing.OutExpo(p, 6));
+            return Color.Lerp(Color.DeepSkyBlue, Color.Transparent, Easing.OutExpo(p, 6));
         }
 
         private float WidthFunction(float p)
         {
-            return MathHelper.Lerp(10, 0, Easing.OutExpo(p, 6));
+            return MathHelper.Lerp(35, 0, Easing.OutExpo(p, 6));
         }
 
         public override bool PreDraw(ref Color lightColor)
         {
+            Lighting.AddLight(Projectile.Center, Color.White.ToVector3() * 0.75f * Main.essScale);
             SimpleTrailShader simpleTrailShader = SimpleTrailShader.Instance;
-            simpleTrailShader.TrailingTexture = TrailRegistry.CrystalTrail;
-            simpleTrailShader.SecondaryTrailingTexture = TrailRegistry.CrystalTrail;
+            simpleTrailShader.Speed = 20;
+            simpleTrailShader.TrailingTexture = TrailRegistry.VortexTrail;
+            simpleTrailShader.SecondaryTrailingTexture = TrailRegistry.VortexTrail;
             SpriteBatch spriteBatch = Main.spriteBatch;
             TrailDrawer.Draw(spriteBatch,
-                Projectile.oldPos, 
-                Projectile.oldRot, 
+                Projectile.oldPos,
+                Projectile.oldRot,
                 ColorFunction,
                 WidthFunction, simpleTrailShader, offset: new Vector2(Projectile.width / 2, Projectile.height / 2));
+       
             return base.PreDraw(ref lightColor);
         }
     }
