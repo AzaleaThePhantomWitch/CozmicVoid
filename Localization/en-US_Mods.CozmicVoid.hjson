@@ -13,3 +13,8 @@ Items: {
 }
 
 Projectiles.ExampleTrailingProjectile.DisplayName: Example Trailing Projectile
+
+NPCs: {
+	IvythornSlimeScaled.DisplayName: Ivythorn Slime Scaled
+	IvythornSlime.DisplayName: Ivythorn Slime
+}

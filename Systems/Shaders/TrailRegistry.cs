@@ -27,5 +27,11 @@ ModContent.Request<Texture2D>($"{AssetDirectory}CausticTrail");
 ModContent.Request<Texture2D>($"{AssetDirectory}CrystalTrail");
         public static Asset<Texture2D> TerraTrail =>
 ModContent.Request<Texture2D>($"{AssetDirectory}TerraTrail");
+        public static Asset<Texture2D> BeamTrail =>
+ModContent.Request<Texture2D>($"{AssetDirectory}BeamTrail");
+        public static Asset<Texture2D> BulbTrail =>
+ModContent.Request<Texture2D>($"{AssetDirectory}BulbTrail");
+        public static Asset<Texture2D> WaveTrail =>
+ModContent.Request<Texture2D>($"{AssetDirectory}WaveTrail");
     }
 }
