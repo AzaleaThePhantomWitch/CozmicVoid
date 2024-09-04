@@ -10,7 +10,7 @@ namespace CozmicVoid.ExampleContent
     {
         protected override float BeamWidthFunction(float p)
         {
-            return MathHelper.Lerp(108, 0, Easing.OutCirc(p));
+            return MathHelper.Lerp(1508, 0, Easing.OutCirc(p));
         }
 
         protected override Color ColorFunction(float p)
@@ -28,16 +28,16 @@ namespace CozmicVoid.ExampleContent
             var shader = SimpleTrailShader.Instance;
 
             //Main trailing texture
-            shader.TrailingTexture = TrailRegistry.BeamTrail;
+            shader.TrailingTexture = TrailRegistry.SimpleTrail;
 
             //Blends with the main texture
-            shader.SecondaryTrailingTexture = TrailRegistry.BeamTrail;
+            shader.SecondaryTrailingTexture = TrailRegistry.WhispTrail;
 
             //Used for blending the trail colors
             //Set it to any noise texture
-            shader.TertiaryTrailingTexture = TrailRegistry.CrystalTrail;
-            shader.PrimaryColor = Color.LightPink;
-            shader.SecondaryColor = Color.Purple;
+            shader.TertiaryTrailingTexture = TrailRegistry.WhispTrail;
+            shader.PrimaryColor = Color.OrangeRed;
+            shader.SecondaryColor = Color.Peru;
             shader.Speed = 20;
 
             //Alpha Blend/Additive

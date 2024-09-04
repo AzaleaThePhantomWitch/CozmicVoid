@@ -15,11 +15,17 @@ Items: {
 		Tooltip: ""
 		DisplayName: Ivythorn
 	}
+
+	IvythornBoomerang: {
+		DisplayName: Ivythorn Boomerang
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
 	ExampleTrailingProjectile.DisplayName: Example Trailing Projectile
 	ExampleCircleExplosionProjectile.DisplayName: Example Circle Explosion Projectile
+	IvythornBoomerangProj.DisplayName: Ivythorn Boomerang Proj
 }
 
 NPCs: {
