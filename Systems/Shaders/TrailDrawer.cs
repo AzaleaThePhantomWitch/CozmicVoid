@@ -185,11 +185,9 @@ namespace CozmicVoid.Systems.Shaders
             var vertices = CalculateVertices(oldPos, colorFunc, widthFunc, offset);
             DrawPrims(vertices, shader);
 
+      
             //Reset the draw count
             shader.DrawCount = 1;
-
-            //Shaders are singletons, so we need to reset to the defaults
-            shader.ResetDefaults();
         }
 
 
