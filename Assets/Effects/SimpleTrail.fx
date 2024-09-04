@@ -1,8 +1,9 @@
 ﻿matrix transformMatrix;
 texture trailTexture;
 texture secondaryTrailTexture;
-float3 primaryColor;
-float3 secondaryColor;
+texture tertiaryTrailTexture;
+float4 primaryColor;
+float4 secondaryColor;
 float time;
 
 sampler2D trailTex = sampler_state
@@ -18,6 +19,16 @@ sampler2D trailTex = sampler_state
 sampler2D secondaryTrailTex = sampler_state
 {
     texture = <secondaryTrailTexture>;
+    magfilter = LINEAR;
+    minfilter = LINEAR;
+    mipfilter = LINEAR;
+    AddressU = wrap;
+    AddressV = wrap;
+};
+
+sampler2D tertiaryTrailTex = sampler_state
+{
+    texture = <tertiaryTrailTexture>;
     magfilter = LINEAR;
     minfilter = LINEAR;
     mipfilter = LINEAR;
@@ -54,11 +65,19 @@ float4 PixelShaderFunction(VertexShaderOutput input) : COLOR0
     float2 coords = input.TextureCoordinates;
     float2 offset = float2(time * -0.05, 0.0);
     float2 offset2 = float2(time * -0.025, 0.0);
+    float2 offset3 = float2(time * -0.02, 0.0);
     
     //Sample the image
-    float4 sample = tex2D(trailTex, coords + offset);
-    float4 secondarySample = tex2D(secondaryTrailTex, coords + offset2);
-    return (sample + secondarySample * 0.5) * color;
+    float s = tex2D(trailTex, coords + offset);
+    float s2 = tex2D(secondaryTrailTex, coords + offset2);
+    float s3 = tex2D(tertiaryTrailTex, coords + offset3);
+
+    float4 sampleColor = s * primaryColor;
+    float4 sampleColor2 = s2 * secondaryColor;
+    float4 finalColor = lerp(sampleColor, sampleColor2, s3);
+    float mixedSample = s + s2;
+    return mixedSample * finalColor * input.Color;
+
 }
 
 technique Technique1

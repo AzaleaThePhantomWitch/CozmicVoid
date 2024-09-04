@@ -7,6 +7,8 @@ namespace CozmicVoid.Systems.Shaders
     internal static class TrailRegistry
     {
         public static string AssetDirectory => "CozmicVoid/Assets/Textures/";
+        public static Asset<Texture2D> GlowTrail =>
+            ModContent.Request<Texture2D>($"{AssetDirectory}GlowTrail");
         public static Asset<Texture2D> SpikyTrail =>
             ModContent.Request<Texture2D>($"{AssetDirectory}SpikyTrail");
         public static Asset<Texture2D> StarTrail =>

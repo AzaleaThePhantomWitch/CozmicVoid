@@ -29,6 +29,7 @@ namespace CozmicVoid.ExampleContent
             Projectile.height = 40;
             Projectile.friendly = true;
             Projectile.penetrate = -1;
+            Projectile.tileCollide = false;
             Projectile.timeLeft = 300;     
         }
         public override void OnKill(int timeLeft)
@@ -46,25 +47,42 @@ namespace CozmicVoid.ExampleContent
         public override void AI()
         {
             base.AI();
-            Projectile.velocity = Projectile.velocity.RotatedBy(MathHelper.PiOver2 / 24);
+            Projectile.velocity = Projectile.velocity.RotatedBy(MathHelper.PiOver4 / 48);
         }
+
         private Color ColorFunction(float p)
         {
-            return Color.Lerp(Color.DeepSkyBlue, Color.Transparent, Easing.OutExpo(p, 6));
+            return Color.Lerp(Color.White, Color.Black, p);
         }
 
         private float WidthFunction(float p)
         {
-            return MathHelper.Lerp(35, 0, Easing.OutExpo(p, 6));
+            return MathHelper.Lerp(250, 0, Easing.OutExpo(p, 6));
         }
 
         public override bool PreDraw(ref Color lightColor)
         {
             Lighting.AddLight(Projectile.Center, Color.White.ToVector3() * 0.75f * Main.essScale);
             SimpleTrailShader simpleTrailShader = SimpleTrailShader.Instance;
-            simpleTrailShader.Speed = 20;
-            simpleTrailShader.TrailingTexture = TrailRegistry.VortexTrail;
-            simpleTrailShader.SecondaryTrailingTexture = TrailRegistry.VortexTrail;
+
+            //Main trailing texture
+            simpleTrailShader.TrailingTexture = TrailRegistry.StarTrail;
+
+            //Blends with the main texture
+            simpleTrailShader.SecondaryTrailingTexture = TrailRegistry.StarTrail;
+
+            //Used for blending the trail colors
+            //Set it to any noise texture
+            simpleTrailShader.TertiaryTrailingTexture = TrailRegistry.CrystalTrail;
+            simpleTrailShader.PrimaryColor = Color.Red;
+            simpleTrailShader.SecondaryColor = Color.Green;
+
+            //Alpha Blend/Additive
+            simpleTrailShader.BlendState = BlendState.Additive;
+
+            //How many times to draw the trail, useful for additive drawing
+            simpleTrailShader.DrawCount = 3;
+
             SpriteBatch spriteBatch = Main.spriteBatch;
             TrailDrawer.Draw(spriteBatch,
                 Projectile.oldPos,
