@@ -44,16 +44,5 @@ namespace CozmicVoid.Systems.Shaders
             Effect.Parameters["tertiaryTrailTexture"].SetValue(TertiaryTrailingTexture.Value);
             Effect.Parameters["time"].SetValue(Main.GlobalTimeWrappedHourly * Speed);
         }
-
-        public override void ResetDefaults()
-        {
-            base.ResetDefaults();
-            TrailingTexture = TrailRegistry.StarTrail;
-            SecondaryTrailingTexture = TrailRegistry.StarTrail;
-            TertiaryTrailingTexture = TrailRegistry.StarTrail;
-            PrimaryColor = Color.White;
-            SecondaryColor = Color.White;
-            Speed = 5;
-        }
     }
 }

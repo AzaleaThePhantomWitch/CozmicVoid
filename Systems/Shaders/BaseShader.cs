@@ -10,10 +10,5 @@ namespace CozmicVoid.Systems.Shaders
         public bool FillShape { get; set; }
         public int DrawCount { get; set; } = 1;
         public abstract void Apply();
-        public virtual void ResetDefaults()
-        {
-            FillShape = false;
-            DrawCount = 1;
-        }
     }
 }

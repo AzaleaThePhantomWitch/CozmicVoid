@@ -188,6 +188,7 @@ namespace CozmicVoid.Systems.Shaders
       
             //Reset the draw count
             shader.DrawCount = 1;
+            shader.FillShape = false;
         }
 
 
