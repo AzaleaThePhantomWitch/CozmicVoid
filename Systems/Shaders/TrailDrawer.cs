@@ -184,17 +184,15 @@ namespace CozmicVoid.Systems.Shaders
 
             var vertices = CalculateVertices(oldPos, colorFunc, widthFunc, offset);
             DrawPrims(vertices, shader);
-
-      
-            //Reset the draw count
-            shader.DrawCount = 1;
-            shader.FillShape = false;
         }
 
 
         private static void DrawPrims(List<VertexPositionColorTexture> vertices, BaseShader shader)
         {
-            GraphicsDevice graphicsDevice = Main.graphics.GraphicsDevice;
+            if (vertices.Count % 6 != 0 || vertices.Count <= 3)
+                return;
+
+            GraphicsDevice graphicsDevice = Main.instance.GraphicsDevice;
             BlendState originalBlendState = graphicsDevice.BlendState;
             CullMode oldCullMode = graphicsDevice.RasterizerState.CullMode;
             SamplerState originalSamplerState = graphicsDevice.SamplerStates[0];
@@ -203,11 +201,8 @@ namespace CozmicVoid.Systems.Shaders
             graphicsDevice.BlendState = BlendState.Additive;
             graphicsDevice.SamplerStates[0] = SamplerState.PointWrap;
 
-            for(int i = 0; i < shader.DrawCount; i++)
-            {
-                graphicsDevice.DrawUserPrimitives(
-                    PrimitiveType.TriangleList, vertices.ToArray(), 0, vertices.Count / 3);
-            }
+            graphicsDevice.DrawUserPrimitives(
+              PrimitiveType.TriangleList, vertices.ToArray(), 0, vertices.Count / 3);
 
             graphicsDevice.RasterizerState.CullMode = oldCullMode;
             graphicsDevice.BlendState = originalBlendState;
