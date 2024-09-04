@@ -199,8 +199,8 @@ namespace CozmicVoid.Systems.Shaders
             SamplerState originalSamplerState = graphicsDevice.SamplerStates[0];
 
             graphicsDevice.RasterizerState.CullMode = CullMode.None;
-            graphicsDevice.BlendState = BlendState.Additive;
-            graphicsDevice.SamplerStates[0] = SamplerState.PointWrap;
+            graphicsDevice.BlendState = shader.BlendState;
+            graphicsDevice.SamplerStates[0] = shader.SamplerState;
 
             graphicsDevice.DrawUserPrimitives(
               PrimitiveType.TriangleList, vertices.ToArray(), 0, vertices.Count / 3);

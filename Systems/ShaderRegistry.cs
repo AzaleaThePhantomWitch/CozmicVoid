@@ -8,10 +8,19 @@ namespace CozmicVoid.Systems
     {
         public static AssetRepository Assets => CozmicVoid.Instance.Assets;
         public static MiscShaderData SimpleTrailEffect => GameShaders.Misc["CozmicVoid:SimpleTrail"];
+        public static MiscShaderData BlendTrailEffect => GameShaders.Misc["CozmicVoid:BlendTrail"];
+
+        private static void RegisterMiscShader(string name, string pass)
+        {
+            string assetPath = $"Assets/Effects/{name}";
+            Asset<Effect> miscShader = Assets.Request<Effect>(assetPath, AssetRequestMode.ImmediateLoad);
+            GameShaders.Misc[$"CozmicVoid:{name}"] = new MiscShaderData(miscShader, pass);
+        }
+
         public static void LoadShaders()
         {
-            Asset<Effect> miscShader = Assets.Request<Effect>("Assets/Effects/SimpleTrail", AssetRequestMode.ImmediateLoad);
-            GameShaders.Misc["CozmicVoid:SimpleTrail"] = new MiscShaderData(miscShader, "PrimitivesPass");
+            RegisterMiscShader("SimpleTrail", "PrimitivesPass");
+            RegisterMiscShader("BlendTrail", "PrimitivesPass");
         }
     }
 }

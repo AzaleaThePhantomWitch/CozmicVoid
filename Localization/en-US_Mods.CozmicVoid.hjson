@@ -17,7 +17,10 @@ Items: {
 	}
 }
 
-Projectiles.ExampleTrailingProjectile.DisplayName: Example Trailing Projectile
+Projectiles: {
+	ExampleTrailingProjectile.DisplayName: Example Trailing Projectile
+	ExampleCircleExplosionProjectile.DisplayName: Example Circle Explosion Projectile
+}
 
 NPCs: {
 	IvythornSlimeScaled.DisplayName: Ivythorn Slime Scaled
