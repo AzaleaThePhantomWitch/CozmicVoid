@@ -80,9 +80,6 @@ namespace CozmicVoid.ExampleContent
             //Alpha Blend/Additive
             simpleTrailShader.BlendState = BlendState.Additive;
 
-            //How many times to draw the trail, useful for additive drawing
-            simpleTrailShader.DrawCount = 3;
-
             SpriteBatch spriteBatch = Main.spriteBatch;
             TrailDrawer.Draw(spriteBatch,
                 Projectile.oldPos,

@@ -8,7 +8,6 @@ namespace CozmicVoid.Systems.Shaders
         public BlendState BlendState { get; set; } = BlendState.Additive;
         public SamplerState SamplerState { get; set; } = SamplerState.LinearWrap;
         public bool FillShape { get; set; }
-        public int DrawCount { get; set; } = 1;
         public abstract void Apply();
     }
 }

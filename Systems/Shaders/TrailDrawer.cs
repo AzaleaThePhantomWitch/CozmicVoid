@@ -184,6 +184,7 @@ namespace CozmicVoid.Systems.Shaders
 
             var vertices = CalculateVertices(oldPos, colorFunc, widthFunc, offset);
             DrawPrims(vertices, shader);
+            shader.FillShape = false;
         }
 
 
