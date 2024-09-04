@@ -19,7 +19,7 @@ namespace CozmicVoid.ExampleContent
         public override void SetStaticDefaults()
         {
             base.SetStaticDefaults();
-            ProjectileID.Sets.TrailCacheLength[Type] = 30;
+            ProjectileID.Sets.TrailCacheLength[Type] = 20;
             ProjectileID.Sets.TrailingMode[Type] = 2;
         }
 
@@ -46,39 +46,42 @@ namespace CozmicVoid.ExampleContent
         }
         public override void AI()
         {
+  
             base.AI();
             Projectile.velocity = Projectile.velocity.RotatedBy(MathHelper.PiOver4 / 48);
         }
 
         private Color ColorFunction(float p)
         {
-            return Color.Lerp(Color.White, Color.Black, p);
+            return Color.Lerp(Color.White, Color.DarkViolet, Easing.OutExpo(p, 7));
         }
 
-        private float WidthFunction(float p)
+        private float WidthFunction(float p)        
         {
-            return MathHelper.Lerp(250, 0, Easing.OutExpo(p, 6));
+            return MathHelper.Lerp(80, 0, Easing.OutExpo(p, 9));
         }
 
         public override bool PreDraw(ref Color lightColor)
         {
-            Lighting.AddLight(Projectile.Center, Color.White.ToVector3() * 0.75f * Main.essScale);
+            Lighting.AddLight(Projectile.Center, Color.White.ToVector3() * 1.75f * Main.essScale);
             SimpleTrailShader simpleTrailShader = SimpleTrailShader.Instance;
-
+            simpleTrailShader.Speed = 40;
             //Main trailing texture
-            simpleTrailShader.TrailingTexture = TrailRegistry.StarTrail;
+            simpleTrailShader.TrailingTexture = TrailRegistry.LazerTrail;
 
             //Blends with the main texture
-            simpleTrailShader.SecondaryTrailingTexture = TrailRegistry.StarTrail;
+            simpleTrailShader.SecondaryTrailingTexture = TrailRegistry.GlowTrail;
 
             //Used for blending the trail colors
             //Set it to any noise texture
-            simpleTrailShader.TertiaryTrailingTexture = TrailRegistry.CrystalTrail;
-            simpleTrailShader.PrimaryColor = Color.Red;
-            simpleTrailShader.SecondaryColor = Color.Green;
+            simpleTrailShader.TertiaryTrailingTexture = TrailRegistry.GlowTrail;
+            simpleTrailShader.PrimaryColor = Color.OrangeRed;
+            simpleTrailShader.SecondaryColor = Color.Peru;
 
             //Alpha Blend/Additive
             simpleTrailShader.BlendState = BlendState.Additive;
+
+
 
             SpriteBatch spriteBatch = Main.spriteBatch;
             TrailDrawer.Draw(spriteBatch,
@@ -86,7 +89,7 @@ namespace CozmicVoid.ExampleContent
                 Projectile.oldRot,
                 ColorFunction,
                 WidthFunction, simpleTrailShader, offset: new Vector2(Projectile.width / 2, Projectile.height / 2));
-       
+
             return base.PreDraw(ref lightColor);
         }
     }

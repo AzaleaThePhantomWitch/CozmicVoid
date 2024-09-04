@@ -1,3 +1,4 @@
+using CozmicVoid.Content.Items.Materials;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
@@ -70,7 +71,7 @@ namespace CozmicVoid.Content.NPCs.Forest.IvythornSlime
         {
             base.ModifyNPCLoot(npcLoot);
             npcLoot.Add(ItemDropRule.Common(ItemID.Gel, minimumDropped: 1, maximumDropped: 2));
-            //npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<Ivythorn>(), minimumDropped: 1, maximumDropped: 4));
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<Ivythorn>(), minimumDropped: 1, maximumDropped: 4));
         }
 
         public override void AI()

@@ -10,6 +10,11 @@ Items: {
 			It's snowing on Mt.Fuji
 			'''
 	}
+
+	Ivythorn: {
+		Tooltip: ""
+		DisplayName: Ivythorn
+	}
 }
 
 Projectiles.ExampleTrailingProjectile.DisplayName: Example Trailing Projectile
