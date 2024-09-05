@@ -10,11 +10,17 @@ Items: {
 			It's snowing on Mt.Fuji
 			'''
 	}
+
+	CrystallineSlasher: {
+		DisplayName: Crystalline Slasher
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
 	ExampleTrailingProjectile.DisplayName: Example Trailing Projectile
 	ExampleCircleExplosionProjectile.DisplayName: Example Circle Explosion Projectile
+	CrystallineSwordSlash.DisplayName: Crystalline Sword Slash
 }
 
 NPCs: {

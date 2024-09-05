@@ -32,9 +32,8 @@ namespace CozmicVoid.ExampleContent
             {
                 _duration = Projectile.timeLeft;
             }
-            float timeLeft = Projectile.timeLeft;
-            float progress = timeLeft / _duration;
-            progress = 1f - progress;
+ 
+            float progress = _timer / _duration;
             float r = RadiusFunction(progress);
             _beamWidth = BeamWidthFunction(progress);
             _beamColor = ColorFunction(progress);
