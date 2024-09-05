@@ -20,6 +20,11 @@ Items: {
 		DisplayName: Ivythorn Boomerang
 		Tooltip: ""
 	}
+
+	CoreGem: {
+		DisplayName: Core Gem
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
@@ -32,3 +37,5 @@ NPCs: {
 	IvythornSlimeScaled.DisplayName: Ivythorn Slime Scaled
 	IvythornSlime.DisplayName: Ivythorn Slime
 }
+
+Tiles.CoreGemT.MapEntry: Core Gem T

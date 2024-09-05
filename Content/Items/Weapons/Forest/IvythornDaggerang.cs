@@ -16,7 +16,7 @@ namespace CozmicVoid.Content.Items.Weapons.Forest
 	// This is a basic item template.
 	// Please see tModLoader's ExampleMod for every other example:
 	// https://github.com/tModLoader/tModLoader/tree/stable/ExampleMod
-	public class IvythornBoomerang : ModItem
+	public class IvythornDaggerang : ModItem
     {
 
 
@@ -57,14 +57,9 @@ namespace CozmicVoid.Content.Items.Weapons.Forest
 
 
 
-    public class IvythornBoomerangProj : ModProjectile
+    public class IvythornDaggerangProj : ModProjectile
     {
-        public int Timer2;
-        public int TimerCD;
-        public int Timer;
-        public int BoomerangAI;
-        public bool BoomerangOnHit;
-        public Vector2 BoomerangVel;
+
         public override void SetStaticDefaults()
         {
             // DisplayName.SetDefault("Boralius");
@@ -90,79 +85,6 @@ namespace CozmicVoid.Content.Items.Weapons.Forest
             BoomerangAI = 1;
             target.AddBuff(BuffID.Poisoned, 180);
         }
-
-        public override void AI()
-        {
-            switch (BoomerangAI)
-            {
-                case 0:
-                    float duration = 8700f;
-
-                    if(Timer2 >= 70)
-                    {
-                        BoomerangAI = 2;
-                    }
-
-                    Timer2++;
-                    TimerCD++;
-                    float p = TimerCD / duration;
-                    float ep = Easing.OutExpo(p);
-                    Projectile.velocity = Vector2.Lerp(Projectile.velocity, Vector2.Zero, ep);
-
-                    TimerCD++;
-                    if (TimerCD >= 10)
-                    {
-                        BoomerangOnHit = false;
-                        Projectile.friendly = true;
-                    }
-                    Projectile.rotation += 0.29f;
-                    break;
-                case 1:
-                    if (!BoomerangOnHit)
-                    {
-
-                        Projectile.friendly = false;
-                        var entitySource = Projectile.GetSource_FromThis();
-                        for (int j = 0; j < 12; j++)
-                        {
-                            int a = Gore.NewGore(entitySource, new Vector2(Projectile.Center.X + Main.rand.Next(-10, 10), Projectile.Center.Y + Main.rand.Next(-10, 10)), Projectile.velocity, 911);
-                            Main.gore[a].timeLeft = 20;
-                            Main.gore[a].scale = Main.rand.NextFloat(.5f, 1f);
-                        }
-                        Main.LocalPlayer.GetModPlayer<EffectsPlayer>().ShakeAtPosition(Projectile.Center, 700f, 8f);
-                        BoomerangOnHit = true;
-                        BoomerangVel = Projectile.velocity;
-                        Projectile.velocity = Vector2.Zero;
-                    }
-                    Timer++;
-                    Projectile.velocity = Vector2.Zero;
-                    if (Timer == 7)
-                    {
-                        TimerCD = 0;
-                        Timer = 0;
-                        BoomerangAI = 0;
-                        Projectile.velocity = BoomerangVel;
-                        BoomerangOnHit = false;
-                    }
-                    break;
-                case 2:
-                    float RotationSpeed2 = 0;
-                    RotationSpeed2 += 0.02f;
-
-                    Projectile.rotation += 0.10f + RotationSpeed2;
-                    Projectile.velocity /= 0.94f;
-                    Vector2 ownerCenter = Main.player[Projectile.owner].Center;
-                    Vector2 directionToPlayer = (ownerCenter - Projectile.Center).SafeNormalize(Vector2.Zero);
-                    Vector2 velocityToPlayer = directionToPlayer * Projectile.velocity.Length();
-                    Projectile.velocity = Vector2.Lerp(Projectile.velocity, velocityToPlayer, 1.9f);
-                    if(Projectile.Center == ownerCenter)
-                    {
-                        Projectile.timeLeft = 1;
-                    }
-                    break;
-            }
-        }
-
 
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
