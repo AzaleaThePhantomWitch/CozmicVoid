@@ -18,7 +18,7 @@
 	  <None Remove="Assets\Effects\WaterBasic.fx" />
 	  <None Remove="Assets\Textures\Empty.png" />
 	  <None Remove="Assets\Textures\GlowTrail.png" />
-	  <None Remove="Content\Items\Weapons\Forest\IvythornBoomerangProj.png" />
+	  <None Remove="Content\Items\CrystallineSlasher.png" />
 	  <None Remove="ExampleContent\Real.png" />
 	</ItemGroup>
 	<ItemGroup>

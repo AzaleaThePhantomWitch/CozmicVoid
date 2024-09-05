@@ -11,15 +11,11 @@ Items: {
 			'''
 	}
 
-	Ivythorn: {
-		Tooltip: ""
-		DisplayName: Ivythorn
-	}
-
-	IvythornBoomerang: {
-		DisplayName: Ivythorn Boomerang
+	CrystallineSlasher: {
+		DisplayName: Crystalline Slasher
 		Tooltip: ""
 	}
+}
 
 	CoreGem: {
 		DisplayName: Core Gem
@@ -30,7 +26,7 @@ Items: {
 Projectiles: {
 	ExampleTrailingProjectile.DisplayName: Example Trailing Projectile
 	ExampleCircleExplosionProjectile.DisplayName: Example Circle Explosion Projectile
-	IvythornBoomerangProj.DisplayName: Ivythorn Boomerang Proj
+	CrystallineSwordSlash.DisplayName: Crystalline Sword Slash
 }
 
 NPCs: {

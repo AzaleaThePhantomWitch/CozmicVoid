@@ -8,6 +8,8 @@ namespace CozmicVoid.Systems.Shaders
     {
         public static string AssetDirectory => "CozmicVoid/Assets/Textures/";
         public static string Empty => AssetDirectory + "Empty";
+        public static Asset<Texture2D> TrailSlash =>
+            ModContent.Request<Texture2D>($"{AssetDirectory}ExampleTrailSlash");
         public static Asset<Texture2D> GlowTrail =>
             ModContent.Request<Texture2D>($"{AssetDirectory}GlowTrail");
         public static Asset<Texture2D> SpikyTrail =>
