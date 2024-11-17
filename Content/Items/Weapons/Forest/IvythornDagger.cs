@@ -4,6 +4,7 @@ using CozmicVoid.Systems.Players;
 using CozmicVoid.Systems.Shaders;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
@@ -16,7 +17,7 @@ namespace CozmicVoid.Content.Items.Weapons.Forest
 	// This is a basic item template.
 	// Please see tModLoader's ExampleMod for every other example:
 	// https://github.com/tModLoader/tModLoader/tree/stable/ExampleMod
-	public class IvythornDaggerang : ModItem
+	public class IvythornDagger : ModItem
     {
 
 
@@ -36,7 +37,7 @@ namespace CozmicVoid.Content.Items.Weapons.Forest
 			Item.UseSound = SoundID.Item1;
 			Item.autoReuse = true;
 			Item.shootSpeed = 12;
-			Item.shoot = ModContent.ProjectileType<IvythornBoomerangProj>();
+			Item.shoot = ModContent.ProjectileType<IvythornDaggerProj>();
 		}
 		public override void AddRecipes()
 		{
@@ -57,7 +58,7 @@ namespace CozmicVoid.Content.Items.Weapons.Forest
 
 
 
-    public class IvythornDaggerangProj : ModProjectile
+    public class IvythornDaggerProj : ModProjectile
     {
 
         public override void SetStaticDefaults()
@@ -68,7 +69,7 @@ namespace CozmicVoid.Content.Items.Weapons.Forest
         }
         public override void SetDefaults()
         {
-
+            Projectile.DamageType = DamageClass.Melee;
             Projectile.aiStyle = -1;
             Projectile.width = 12;
             Projectile.height = 23;
@@ -82,7 +83,6 @@ namespace CozmicVoid.Content.Items.Weapons.Forest
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            BoomerangAI = 1;
             target.AddBuff(BuffID.Poisoned, 180);
         }
 
@@ -99,6 +99,7 @@ namespace CozmicVoid.Content.Items.Weapons.Forest
         }
         public override bool PreDraw(ref Color lightColor)
         {
+
             DrawHelper.DrawAdditiveAfterImage(Projectile, Color.Gray, Color.Transparent, ref lightColor);
             Texture2D texture2 = ModContent.Request<Texture2D>(Texture).Value;
             Vector2 drawPos2 = Projectile.position - Main.screenPosition + texture2.Size() / 2;

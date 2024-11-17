@@ -79,6 +79,7 @@ namespace CozmicVoid.Content.Items.Weapons.Forest
             Projectile.height = 23;
             Projectile.penetrate += 23;
             Projectile.friendly = true;
+            Projectile.DamageType = DamageClass.Melee;
         }
         public override void OnKill(int timeLeft)
         {

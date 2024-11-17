@@ -8,6 +8,11 @@ namespace CozmicVoid.Systems.Shaders
 {
     internal class SimpleTrailShader : BaseShader
     {
+
+
+ 
+
+
         private static SimpleTrailShader _instance;
         public SimpleTrailShader()
         {

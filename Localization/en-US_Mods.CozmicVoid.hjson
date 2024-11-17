@@ -1,37 +1,46 @@
-# This file will automatically update with entries for new content after a build and reload.
+Tiles.CoreGemT.MapEntry: Core Gem T
 
 Items: {
-	Real: {
-		DisplayName: Real
-		Tooltip:
-			'''
-			Template of an item
-			Replacing this tooltip is duty 
-			It's snowing on Mt.Fuji
-			'''
-	}
-
 	CrystallineSlasher: {
 		DisplayName: Crystalline Slasher
 		Tooltip: ""
 	}
-}
 
 	CoreGem: {
 		DisplayName: Core Gem
 		Tooltip: ""
 	}
-}
 
-Projectiles: {
-	ExampleTrailingProjectile.DisplayName: Example Trailing Projectile
-	ExampleCircleExplosionProjectile.DisplayName: Example Circle Explosion Projectile
-	CrystallineSwordSlash.DisplayName: Crystalline Sword Slash
+	Ivythorn: {
+		DisplayName: Ivythorn
+		Tooltip: ""
+	}
+
+	Real: {
+		DisplayName: Real
+		Tooltip: ""
+	}
+
+	IvythornBoomerang: {
+		DisplayName: Ivythorn Boomerang
+		Tooltip: ""
+	}
+
+	IvythornDagger: {
+		DisplayName: Ivythorn Dagger
+		Tooltip: ""
+	}
 }
 
 NPCs: {
-	IvythornSlimeScaled.DisplayName: Ivythorn Slime Scaled
 	IvythornSlime.DisplayName: Ivythorn Slime
+	IvythornSlimeScaled.DisplayName: Ivythorn Slime Scaled
 }
 
-Tiles.CoreGemT.MapEntry: Core Gem T
+Projectiles: {
+	CrystallineSwordSlash.DisplayName: Crystalline Sword Slash
+	IvythornBoomerangProj.DisplayName: Ivythorn Boomerang Proj
+	IvythornDaggerProj.DisplayName: Ivythorn Dagger Proj
+	ExampleCircleExplosionProjectile.DisplayName: Example Circle Explosion Projectile
+	ExampleTrailingProjectile.DisplayName: Example Trailing Projectile
+}

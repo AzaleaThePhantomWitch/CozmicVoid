@@ -48,7 +48,7 @@ namespace CozmicVoid.Content.Items
             Projectile.NewProjectile(source, position, velocity, type, damage, knockback,
                 player.whoAmI, combo, dir);
 
-            comboPlayer.IncreaseCombo(maxCombo: 6);
+            comboPlayer.IncreaseCombo(maxCombo: 3);
             return false;
         }
     }
@@ -58,16 +58,18 @@ namespace CozmicVoid.Content.Items
         public override string Texture => "CozmicVoid/Content/Items/CrystallineSlasher";
         ref float ComboAtt => ref Projectile.ai[0];
         public bool Hit;
-
+        public int HitsAc;
         public override void SetStaticDefaults()
         {
-            ProjectileID.Sets.TrailCacheLength[Type] = 64;
-            ProjectileID.Sets.TrailingMode[Type] = 2;
+            ProjectileID.Sets.TrailCacheLength[Type] = 100;
+            ProjectileID.Sets.TrailingMode[Type] = 0;
 
         }
 
         public override void SetDefaults()
         {
+            HitsAc = 3;
+            ProjectileID.Sets.TrailCacheLength[Type] = 100;
             holdOffset = 60;
             trailStartOffset = 0.2f;
             Projectile.timeLeft = SwingTime;
@@ -82,7 +84,7 @@ namespace CozmicVoid.Content.Items
 
             Projectile.extraUpdates = ExtraUpdateMult - 1;
             Projectile.usesLocalNPCImmunity = true;
-            Projectile.localNPCHitCooldown = 10000;
+            Projectile.localNPCHitCooldown = 50;
         }
 
         protected override float SwingTimeFunction()
@@ -91,17 +93,11 @@ namespace CozmicVoid.Content.Items
             {
                 default:
                 case 0:
-                    return 24;
+                    return 25;
                 case 1:
-                    return 24;
+                    return 25;
                 case 2:
-                    return 24;
-                case 3:
-                    return 24;
-                case 4:
-                    return 24;
-                case 5:
-                    return 48;
+                    return 35;
             }
         }
 
@@ -113,26 +109,12 @@ namespace CozmicVoid.Content.Items
             switch (ComboAtt)
             {
                 default:
-                case 0:
-                    startSwingRot = targetRotation - MathHelper.ToRadians(135);
-                    endSwingRot = targetRotation + MathHelper.ToRadians(135);
-                    swingProgress = Easing.InOutExpo(lerpValue, 10);
-                    break;
                 case 3:
-                    startSwingRot = targetRotation - MathHelper.ToRadians(135);
-                    endSwingRot = targetRotation + MathHelper.ToRadians(135);
-                    swingProgress = Easing.InOutExpo(lerpValue, 10);
-                    break;
-                case 4:
-                    startSwingRot = targetRotation - MathHelper.ToRadians(135);
-                    endSwingRot = targetRotation + MathHelper.ToRadians(135);
-                    swingProgress = Easing.InOutExpo(lerpValue, 10);
-                    break;
-                case 5:
-                    float circleRange = MathHelper.PiOver2 + MathHelper.PiOver4 + MathHelper.TwoPi;
+                    Hit = false;
+                    float circleRange = MathHelper.PiOver4 + MathHelper.PiOver4 + MathHelper.TwoPi;
                     startSwingRot = targetRotation - circleRange;
                     endSwingRot = targetRotation + circleRange;
-                    swingProgress = Easing.InOutExpo(lerpValue, 10);
+                    swingProgress = Easing.OutCirc(lerpValue);
                     break;
             }
         }
@@ -146,18 +128,18 @@ namespace CozmicVoid.Content.Items
 
             switch (ComboAtt)
             {
-                case 1:
-                    swingXRadius = 128 / 1.5f;
-                    swingYRadius = 64 / 1.5f;
+                case 0:
+                    swingXRadius = 178 / 1.5f;
+                    swingYRadius = 34 / 1.5f;
                     swingRange = MathHelper.Pi + MathHelper.PiOver2 + MathHelper.PiOver4;
-                    swingProgress = Easing.InOutExpo(lerpValue, 10);
+                    swingProgress = Easing.OutCirc(lerpValue);
 
                     break;
-                case 2:
-                    swingXRadius = 128 / 1.5f;
-                    swingYRadius = 64 / 1.5f;
+                case 1:
+                    swingXRadius = 178 / 1.5f;
+                    swingYRadius = 34 / 1.5f;
                     swingRange = MathHelper.Pi + MathHelper.PiOver2 + MathHelper.PiOver4;
-                    swingProgress = Easing.InOutExpo(lerpValue, 10);
+                    swingProgress = Easing.OutCirc(lerpValue);
                     break;
             }
         }
@@ -179,7 +161,7 @@ namespace CozmicVoid.Content.Items
             switch (ComboAtt)
             {
                 case 0:
-                    SimpleEasedSwingAI();
+                    OvalEasedSwingAI();
                     break;
 
                 case 1:
@@ -187,33 +169,26 @@ namespace CozmicVoid.Content.Items
                     break;
 
                 case 2:
-                    OvalEasedSwingAI();
-                    break;
-
-                case 3:
-                    SimpleEasedSwingAI();
-                    break;
-
-                case 4:
-                    SimpleEasedSwingAI();
-                    break;
-
-                case 5:
                     SimpleEasedSwingAI();
                     break;
             }
         }
-
+        int Trys = 0;
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
+ 
             base.OnHitNPC(target, hit, damageDone);
-            if (!Hit)
+            if(Trys <= HitsAc)
             {
-                Main.LocalPlayer.GetModPlayer<EffectsPlayer>().ShakeAtPosition(target.Center, 1024f, 8f);
-
-                Hit = true;
-                hitstopTimer = 4 * ExtraUpdateMult;
+                if (!Hit)
+                {
+                    Main.LocalPlayer.GetModPlayer<EffectsPlayer>().ShakeAtPosition(target.Center, 1024f, 8f);
+                    Trys++;
+                    Hit = true;
+                    hitstopTimer = 8 * ExtraUpdateMult;
+                }
             }
+
         }
 
         //TRAIL VISUALS
@@ -226,43 +201,47 @@ namespace CozmicVoid.Content.Items
         protected override Vector2 GetTrailOffset()
         {
             //Moves the trail along the blade, negative goes towards the player, positive goes away the player
-            return Vector2.One * 92;
+            return Vector2.One * 72;
         }
 
         protected override float WidthFunction(float p)
         {
-            float trailWidth = MathHelper.Lerp(0, 256, p);
-            float fadeWidth = MathHelper.Lerp(trailWidth, 0, _smoothedLerpValue) * Easing.OutExpo(_smoothedLerpValue, 4);
+            float trailWidth = MathHelper.Lerp(200, 200, p);
+            float fadeWidth = MathHelper.Lerp(trailWidth, 5, _smoothedLerpValue) * Easing.OutExpo(_smoothedLerpValue, 4);
             return fadeWidth;
         }
 
         protected override Color ColorFunction(float p)
         {
-            Color trailColor = Color.Lerp(Color.White, Color.LightCyan, p);
-            Color fadeColor = Color.Lerp(trailColor, Color.DeepSkyBlue, _smoothedLerpValue);
+            Color trailColor = Color.Lerp(Color.White, Color.Black, p);
+            Color fadeColor = Color.Lerp(trailColor, Color.White, _smoothedLerpValue);
             //This will make it fade out near the end
             return fadeColor;
         }
 
         protected override BaseShader ReadyShader()
         {
-
-            var shader = SimpleTrailShader.Instance;
+            Lighting.AddLight(Projectile.Center, Color.White.ToVector3() * 1.75f * Main.essScale);
+            SimpleTrailShader2 simpleTrailShader = SimpleTrailShader2.Instance;
 
             //Main trailing texture
-            shader.TrailingTexture = TrailRegistry.GlowTrail;
+            simpleTrailShader.TrailingTexture = TrailRegistry.GlowTrail;
 
             //Blends with the main texture
-            shader.SecondaryTrailingTexture = TrailRegistry.GlowTrail;
 
-            //Used for blending the trail colors
-            //Set it to any noise texture
-            shader.TertiaryTrailingTexture = TrailRegistry.CrystalTrail;
-            shader.PrimaryColor = Color.White;
-            shader.SecondaryColor = Color.DarkSlateBlue;
-            shader.BlendState = BlendState.Additive;
-            shader.Speed = 25;
-            return shader;
+            //Alpha Blend/Additive
+            simpleTrailShader.BlendState = BlendState.AlphaBlend;
+
+
+
+            SpriteBatch spriteBatch = Main.spriteBatch;
+            TrailDrawer.Draw(spriteBatch,
+                Projectile.oldPos,
+                Projectile.oldRot,
+                ColorFunction,
+                WidthFunction, simpleTrailShader, offset: new Vector2(Projectile.width / 2, Projectile.height / 2));
+
+            return simpleTrailShader;
         }
     }
 }

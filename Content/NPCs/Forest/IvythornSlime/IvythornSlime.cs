@@ -1,7 +1,9 @@
 using CozmicVoid.Content.Items.Materials;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 using Terraria;
+using Terraria.GameContent;
 using Terraria.GameContent.Biomes;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
@@ -55,6 +57,7 @@ namespace CozmicVoid.Content.NPCs.Forest.IvythornSlime
                     texture = ModContent.Request<Texture2D>(Texture + "_3").Value;
                     break;
             }
+            NPCHelper.DrawDrugEffect(NPC, screenPos, Color.LightGreen, Color.DarkGreen);
 
             spriteBatch.Draw(texture, NPC.Center - Main.screenPosition + new Vector2(0, NPC.gfxOffY), NPC.frame,
                 new Color(drawColor.R, drawColor.G, drawColor.B, 190), NPC.rotation, NPC.frame.Size() / 2, NPC.scale, SpriteEffects.None, 0);
@@ -87,7 +90,6 @@ namespace CozmicVoid.Content.NPCs.Forest.IvythornSlime
                 target.AddBuff(BuffID.Poisoned, 180);
             }
         }
-
         public override void HitEffect(NPC.HitInfo hit)
         {
             var entitySource = NPC.GetSource_FromThis();

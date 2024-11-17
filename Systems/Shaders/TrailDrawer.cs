@@ -144,7 +144,7 @@ namespace CozmicVoid.Systems.Shaders
 
         private static void LerpTrailPoints(Vector2[] oldPos, out Vector2[] trailingPoints)
         {
-            float smoothFactor = 8;
+            float smoothFactor = 2;
             List<Vector2> points = new List<Vector2>();
             for (int i = 0; i < oldPos.Length - 1; i++)
             {
