@@ -40,7 +40,8 @@ namespace CozmicVoid.Content.Items.Materials
             {
                 gravity = 0;
 
-                if (++timer >= 100)
+                timer++;
+                if (timer >= 100)
                 {
                     for (int i = 0; i < 7; i++)
                     {
@@ -48,7 +49,9 @@ namespace CozmicVoid.Content.Items.Materials
                         Gore.NewGorePerfect(Item.GetSource_FromThis(), Item.position, velocity * 2, 16, Main.rand.NextFloat(0.5f, 1.3f));
                         Gore.NewGorePerfect(Item.GetSource_FromThis(), Item.position, velocity * 2, 17, Main.rand.NextFloat(0.5f, 1.3f));
                     }
-                    Item.ChangeItemType(ModContent.ItemType<StarFragment>());
+                    Item.NewItem(Item.GetSource_FromThis(), Item.Hitbox, ModContent.ItemType<StarFragment>(), Item.stack);
+                    Item.TurnToAir();
+                    //Item.ChangeItemType(ModContent.ItemType<StarFragment>());
                     //Item.type = ModContent.ItemType<StarFragment>();
                 }
                 else if (timer == 0)
@@ -59,6 +62,10 @@ namespace CozmicVoid.Content.Items.Materials
                 {
                     Item.velocity /= 1.05f;
                 }
+            }
+            else
+            {
+                timer = 0;
             }
 
         }
