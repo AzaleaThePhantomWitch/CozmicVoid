@@ -1,3 +1,5 @@
-displayName = Cozmic Void
-author = Ableblock Studios
+displayName = Azurea Breaking
+author = Vanity
 version = 0.1
+buildIgnore = Luminance.dll\*, Luminance.pdb\* ,Luminance.xml\*, .vs\*, Properties\*, *.csproj, *.user, obj\*, bin\*, *.config, .git\*, .github\*, LICENSE, README.md, .editorconfig, .gitignore, .gitattributes, Assets\Effects\Compiler\*, ModReferences\*, *.mp4
+modReferences = Luminance

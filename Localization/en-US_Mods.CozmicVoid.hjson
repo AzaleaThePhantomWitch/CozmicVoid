@@ -30,11 +30,27 @@ Items: {
 		DisplayName: Ivythorn Dagger
 		Tooltip: ""
 	}
+
+	StarFragment: {
+		DisplayName: Star Fragment
+		Tooltip: ""
+	}
+
+	StarSculptor: {
+		DisplayName: Star Sculptor
+		Tooltip: ""
+	}
+
+	RevengeConstruct: {
+		DisplayName: Revenge Construct
+		Tooltip: ""
+	}
 }
 
 NPCs: {
 	IvythornSlime.DisplayName: Ivythorn Slime
 	IvythornSlimeScaled.DisplayName: Ivythorn Slime Scaled
+	StarDreamer.DisplayName: Star Dreamer
 }
 
 Projectiles: {
@@ -43,4 +59,7 @@ Projectiles: {
 	IvythornDaggerProj.DisplayName: Ivythorn Dagger Proj
 	ExampleCircleExplosionProjectile.DisplayName: Example Circle Explosion Projectile
 	ExampleTrailingProjectile.DisplayName: Example Trailing Projectile
+	StarFlare.DisplayName: Star Flare
+	StarSculptorSwordSlash.DisplayName: Star Sculptor Sword Slash
+	SculptorStar.DisplayName: Sculptor Star
 }

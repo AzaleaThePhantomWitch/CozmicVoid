@@ -7,7 +7,7 @@ using Terraria;
 
 namespace CozmicVoid.Systems.Shaders
 {
-    internal class TrailDrawer
+    internal class SwordTrailDrawer
     {
         public static Matrix WorldViewPoint
         {
@@ -144,7 +144,7 @@ namespace CozmicVoid.Systems.Shaders
 
         private static void LerpTrailPoints(Vector2[] oldPos, out Vector2[] trailingPoints)
         {
-            float smoothFactor = 12;
+            float smoothFactor = 1;
             List<Vector2> points = new List<Vector2>();
             for (int i = 0; i < oldPos.Length - 1; i++)
             {

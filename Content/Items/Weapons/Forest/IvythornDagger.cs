@@ -1,7 +1,6 @@
-using CozmicVoid.ExampleContent;
-using CozmicVoid.Systems.MathHelpers;
-using CozmicVoid.Systems.Players;
-using CozmicVoid.Systems.Shaders;
+
+using Luminance.Assets;
+using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -11,6 +10,12 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.Map;
 using Terraria.ModLoader;
+
+
+using Luminance.Common.DataStructures;
+using System.Collections.Generic;
+using static Terraria.GameContent.Animations.IL_Actions.Sprites;
+using NoxusBoss.Core.Graphics.Automators;
 
 namespace CozmicVoid.Content.Items.Weapons.Forest
 { 
@@ -58,7 +63,7 @@ namespace CozmicVoid.Content.Items.Weapons.Forest
 
 
 
-    public class IvythornDaggerProj : ModProjectile
+    public class IvythornDaggerProj : ModProjectile, ShaderDraws
     {
 
         public override void SetStaticDefaults()
@@ -86,6 +91,16 @@ namespace CozmicVoid.Content.Items.Weapons.Forest
             target.AddBuff(BuffID.Poisoned, 180);
         }
 
+        public static float MaxScale => 4.2f;
+        public override void AI()
+        {
+            if (UnstableOverlayInterpolant <= 0.01f)
+                Projectile.scale = MathF.Pow(InverseLerp(1f, 1, Time), 4.1f) * MaxScale;
+            Projectile.ai[1] = 413;
+            Projectile.ai[0] = 413;
+        }
+        public ref float UnstableOverlayInterpolant => ref Projectile.ai[1];
+
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
             var entitySource = Projectile.GetSource_FromThis();
@@ -97,16 +112,61 @@ namespace CozmicVoid.Content.Items.Weapons.Forest
             }
             return base.OnTileCollide(oldVelocity);
         }
-        public override bool PreDraw(ref Color lightColor)
+        public void RenderShineGlow(Vector2 drawPosition)
+        {
+            Texture2D texture = (Texture2D)Mod.Assets.Request<Texture2D>("Assets/Effects/Masks/Noise/WavyBlotchNoise");
+            ManagedShader shineShader = ShaderManager.GetShader("CozmicVoid.RadialShineShader");
+            shineShader.Apply();
+
+            Vector2 shineScale = Vector2.One * Projectile.width * Projectile.scale * 3.2f / texture.Size();
+            Main.spriteBatch.Draw(texture, drawPosition, null, new Color(252, 242, 124) * 0.4f, Projectile.rotation, texture.Size() * 0.5f, shineScale, 0, 0f);
+        }
+
+        public void RenderSun(Vector2 drawPosition)
+        {
+            Texture2D texture = (Texture2D)Mod.Assets.Request<Texture2D>("Assets/Effects/Masks/Noise/WavyBlotchNoise");
+            Texture2D texture2 = (Texture2D)Mod.Assets.Request<Texture2D>("Assets/Effects/Masks/Noise/DendriticNoiseZoomedOut");
+            Texture2D texture3 = (Texture2D)Mod.Assets.Request<Texture2D>("Assets/Textures/PsychedelicWingTextureOffsetMap");
+
+            Color mainColor = Color.Lerp(new Color(204, 163, 79), new Color(100, 199, 255), Saturate(UnstableOverlayInterpolant).Cubed());
+            Color darkerColor = Color.Lerp(new Color(204, 92, 25), new Color(255, 255, 255), Saturate(UnstableOverlayInterpolant).Cubed());
+
+            var fireballShader = ShaderManager.GetShader("CozmicVoid.OrbShader");
+            fireballShader.TrySetParameter("coronaIntensityFactor", UnstableOverlayInterpolant.Squared() * 1.92f + 0.044f);
+            fireballShader.TrySetParameter("mainColor", mainColor);
+            fireballShader.TrySetParameter("darkerColor", darkerColor);
+            fireballShader.TrySetParameter("subtractiveAccentFactor", new Color(181, 0, 0));
+            fireballShader.TrySetParameter("sphereSpinTime", Main.GlobalTimeWrappedHourly * 0.9f);
+            fireballShader.SetTexture(texture, 1, SamplerState.LinearWrap);
+            fireballShader.SetTexture(texture3, 2, SamplerState.LinearWrap);
+            fireballShader.Apply();
+
+            Vector2 scale = Vector2.One * Projectile.width * Projectile.scale * 1.5f / texture2.Size();
+            Main.spriteBatch.Draw(texture2, drawPosition, null, Color.White with { A = 193 }, Projectile.rotation, texture2.Size() * 0.5f, scale, 0, 0f);
+        }
+
+        public void DrawWithShader(SpriteBatch spriteBatch)
         {
 
-            DrawHelper.DrawAdditiveAfterImage(Projectile, Color.Gray, Color.Transparent, ref lightColor);
-            Texture2D texture2 = ModContent.Request<Texture2D>(Texture).Value;
-            Vector2 drawPos2 = Projectile.position - Main.screenPosition + texture2.Size() / 2;
-            Vector2 drawOrigin2 = texture2.Size() / 2;
-            Main.EntitySpriteDraw(texture2, drawPos2, null, lightColor, Projectile.rotation, drawOrigin2, Projectile.scale, SpriteEffects.None, 0);
 
-            return false;
+            Main.spriteBatch.End();
+            Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.LinearWrap, DepthStencilState.None, RasterizerState.CullNone, null, Main.GameViewMatrix.TransformationMatrix);
+            Vector2 drawPosition = Projectile.Center - Main.screenPosition;
+            RenderShineGlow(drawPosition);
+            RenderSun(drawPosition);
+
+
+            Main.pixelShader.CurrentTechnique.Passes[0].Apply();
         }
+
+        public int Time
+        {
+            get;
+            set;
+        }
+
+
+        public override string Texture => MiscTexturesRegistry.InvisiblePixelPath;
+
     }
 }

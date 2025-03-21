@@ -309,23 +309,6 @@ namespace CozmicVoid
             }
         }
 
-        public static void DrawAdvancedBroochGlow(Item item, SpriteBatch spriteBatch, Vector2 position, Color glowColor)
-        {
-            float sizeLimit = 34;
-            int numberOfCloneImages = 3;
-            Main.DrawItemIcon(spriteBatch, item, position, Color.White * 0.2f, sizeLimit);
-            for (float i = 0; i < 1; i += 1f / numberOfCloneImages)
-            {
-                float cloneImageDistance = MathF.Cos(Main.GlobalTimeWrappedHourly / 2.4f * MathF.Tau / 2f) + 0.5f;
-                cloneImageDistance = MathHelper.Max(cloneImageDistance, 0.05f);
-                Color color = glowColor * 0.4f;
-                color *= 1f - cloneImageDistance * 0.2f;
-                color.A = 0;
-                cloneImageDistance *= 3;
-                Vector2 drawPos = position + (i * MathF.Tau).ToRotationVector2() * (cloneImageDistance + 2f);
-                Main.DrawItemIcon(spriteBatch, item, drawPos, color, sizeLimit);
-            }
-        }
 
         public static void DrawGlow2InWorld(Item item, SpriteBatch spriteBatch, ref float rotation, ref float scale, int whoAmI)
         {
@@ -390,16 +373,16 @@ namespace CozmicVoid
             Lighting.AddLight(projectile.Center, worldLightingColor.ToVector3() * 1.0f * Main.essScale);
         }
 
-        public static void DrawDimLight(NPC npc, float dimLightX, float dimLightY, float dimLightZ, Color worldLightingColor, Color lightColor, int glowCount = 4)
+        public static void DrawDimLight(NPC npc, Vector2 Offset, float dimLightX, float dimLightY, float dimLightZ, Color worldLightingColor, int glowCount = 4)
         {
             Texture2D texture = ModContent.Request<Texture2D>("CozmicVoid/Assets/Effects/Masks/DimLight").Value;
             for (int i = 0; i < glowCount; i++)
             {
-                Main.spriteBatch.Draw(texture, npc.Center - Main.screenPosition, null, new Color((int)(dimLightX * 1), (int)(dimLightY * 1), (int)(dimLightZ * 1), 0), npc.rotation, new Vector2(32, 32), 0.17f * (7 + 0.6f), SpriteEffects.None, 0f);
+                Main.spriteBatch.Draw(texture, (npc.Center - Main.screenPosition) + Offset, null, new Color((int)(dimLightX * 1), (int)(dimLightY * 1), (int)(dimLightZ * 1), 0), npc.rotation, new Vector2(32, 32), 0.17f * (7 + 0.6f), SpriteEffects.None, 0f);
             }
 
-            Main.spriteBatch.Draw(texture, npc.Center - Main.screenPosition, null, new Color((int)(dimLightX * 1), (int)(dimLightY * 1), (int)(dimLightZ * 1), 0), npc.rotation, new Vector2(32, 32), 0.07f * (7 + 0.6f), SpriteEffects.None, 0f);
-            Lighting.AddLight(npc.Center, worldLightingColor.ToVector3() * 1.0f * Main.essScale);
+            Main.spriteBatch.Draw(texture, (npc.Center - Main.screenPosition) + Offset, null, new Color((int)(dimLightX * 1), (int)(dimLightY * 1), (int)(dimLightZ * 1), 0), npc.rotation, new Vector2(32, 32), 0.07f * (7 + 0.6f), SpriteEffects.None, 0f);
+            Lighting.AddLight(npc.Center + Offset, worldLightingColor.ToVector3() * 1.0f * Main.essScale);
         }
         public static void DrawAdditiveAfterImage(Projectile projectile, Color startColor, Color endColor, ref Color lightColor)
         {
@@ -418,7 +401,7 @@ namespace CozmicVoid
             {
                 Vector2 drawPos = projectile.oldPos[k] - Main.screenPosition + drawOrigin;// + new Vector2(0f, projectile.gfxOffY);
                 Color color = projectile.GetAlpha(Color.Lerp(startColor, endColor, 1f / projectile.oldPos.Length * k) * (1f - 1f / projectile.oldPos.Length * k));
-                Main.spriteBatch.Draw(texture, drawPos, sourceRectangle, color, projectile.oldRot[k], drawOrigin, projectile.scale, SpriteEffects.None, 0f);
+                Main.spriteBatch.Draw(texture, drawPos, sourceRectangle, color, projectile.rotation, drawOrigin, projectile.scale, SpriteEffects.None, 0f);
             }
 
             Main.spriteBatch.End();

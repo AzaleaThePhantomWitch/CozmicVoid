@@ -56,15 +56,8 @@ namespace CozmicVoid
         }
         public static void DrawDrugEffect(NPC npc, Vector2 screenPos, Color startColor, Color endColor)
         {
-            Vector2 center = npc.Center + new Vector2(0f, npc.height * -0.1f);
             Lighting.AddLight(npc.Center, Color.Purple.ToVector3() * 0.25f * Main.essScale);
-            // This creates a randomly rotated vector of length 1, which gets it's components multiplied by the parameters
-            Vector2 direction = Main.rand.NextVector2CircularEdge(npc.width * 0.6f, npc.height * 0.6f);
-            float distance = 0.3f + Main.rand.NextFloat() * 0.5f;
-            Vector2 velocity = new Vector2(0f, -Main.rand.NextFloat() * 0.3f - 1.5f);
             Texture2D texture = TextureAssets.Npc[npc.type].Value;
-
-
 
             Vector2 frameOrigin = npc.frame.Size();
             Vector2 offset = new Vector2(npc.width - frameOrigin.X + 0, npc.height - npc.frame.Height + 5);

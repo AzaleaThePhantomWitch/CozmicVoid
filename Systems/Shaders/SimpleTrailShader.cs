@@ -48,6 +48,7 @@ namespace CozmicVoid.Systems.Shaders
             Effect.Parameters["secondaryTrailTexture"].SetValue(SecondaryTrailingTexture.Value);
             Effect.Parameters["tertiaryTrailTexture"].SetValue(TertiaryTrailingTexture.Value);
             Effect.Parameters["time"].SetValue(Main.GlobalTimeWrappedHourly * Speed);
+            Effect.Parameters["time"].SetValue(Main.GlobalTimeWrappedHourly * Speed);
         }
     }
 }

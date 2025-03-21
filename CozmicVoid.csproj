@@ -25,6 +25,11 @@
 	<ItemGroup>
 	  <Folder Include="Assets\Sounds\" />
 	</ItemGroup>
+	<ItemGroup>
+	  <Reference Include="Luminance">
+	    <HintPath>Luminance.dll</HintPath>
+	  </Reference>
+	</ItemGroup>
 
 	<!-- References -->
 
