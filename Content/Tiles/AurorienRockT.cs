@@ -23,7 +23,6 @@ namespace CozmicVoid.Content.Tiles
             Main.tileSolid[Type] = true;
             Main.tileBlockLight[Type] = true;
 
-
             LocalizedText name = CreateMapEntryName();
             // name.SetDefault("Frile Ore");
             AddMapEntry(new Color(255, 169, 0), name);

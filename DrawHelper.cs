@@ -310,7 +310,7 @@ namespace CozmicVoid
         }
 
 
-        public static void DrawGlow2InWorld(Item item, SpriteBatch spriteBatch, ref float rotation, ref float scale, int whoAmI)
+        public static void DrawGlow2InWorld(Item item, SpriteBatch spriteBatch, ref float rotation, ref float scale, int whoAmI, Color glowColor, Color glowColorMin)
         {
             // Draw the periodic glow effect behind the item when dropped in the world (hence PreDrawInWorld)
             Texture2D texture = TextureAssets.Item[item.type].Value;
@@ -344,13 +344,13 @@ namespace CozmicVoid
             for (float i = 0f; i < 1f; i += 0.25f)
             {
                 float radians = (i + timer) * MathHelper.TwoPi;
-                spriteBatch.Draw(texture, drawPos + new Vector2(0f, 8f).RotatedBy(radians) * time, frame, new Color(90, 70, 255, 50), rotation, frameOrigin, scale, SpriteEffects.None, 0);
+                spriteBatch.Draw(texture, drawPos + new Vector2(0f, 8f).RotatedBy(radians) * time, frame, new Color(glowColor.R, glowColor.G, glowColor.B, 50), rotation, frameOrigin, scale, SpriteEffects.None, 0);
             }
 
             for (float i = 0f; i < 1f; i += 0.34f)
             {
                 float radians = (i + timer) * MathHelper.TwoPi;
-                spriteBatch.Draw(texture, drawPos + new Vector2(0f, 4f).RotatedBy(radians) * time, frame, new Color(140, 120, 255, 77), rotation, frameOrigin, scale, SpriteEffects.None, 0);
+                spriteBatch.Draw(texture, drawPos + new Vector2(0f, 4f).RotatedBy(radians) * time, frame, new Color(glowColorMin.R, glowColorMin.G, glowColorMin.B, 77), rotation, frameOrigin, scale, SpriteEffects.None, 0);
             }
         }
 
@@ -372,6 +372,18 @@ namespace CozmicVoid
             Main.spriteBatch.Draw(texture, projectile.Center - Main.screenPosition, null, new Color((int)(dimLightX * 1), (int)(dimLightY * 1), (int)(dimLightZ * 1), 0), projectile.rotation, new Vector2(32, 32), 0.07f * (7 + 0.6f), SpriteEffects.None, 0f);
             Lighting.AddLight(projectile.Center, worldLightingColor.ToVector3() * 1.0f * Main.essScale);
         }
+
+        public static void DrawItemShine(Item item, Color lightColor, Color lightColorTwo, float ColorMult, int glowCount = 4)
+        {
+            Texture2D texture = ModContent.Request<Texture2D>("CozmicVoid/Assets/Effects/Masks/Extra_63").Value;
+            for (int i = 0; i < glowCount; i++)
+            {
+                Main.spriteBatch.Draw(texture, item.Center - Main.screenPosition, null, new Color((int)(lightColor.R * ColorMult), (int)(lightColor.G * ColorMult), (int)(lightColor.B * ColorMult), 0), Main.GlobalTimeWrappedHourly / 2, new Vector2(256, 256), 0.17f * (2), SpriteEffects.None, 0f);
+            }
+
+            Main.spriteBatch.Draw(texture, item.Center - Main.screenPosition, null, new Color((int)(lightColorTwo.R * ColorMult), (int)(lightColorTwo.G * ColorMult), (int)(lightColorTwo.B * ColorMult), 0), Main.GlobalTimeWrappedHourly, new Vector2(256, 256), 0.17f * (2), SpriteEffects.None, 0f);
+        }
+
 
         public static void DrawDimLight(NPC npc, Vector2 Offset, float dimLightX, float dimLightY, float dimLightZ, Color worldLightingColor, int glowCount = 4)
         {

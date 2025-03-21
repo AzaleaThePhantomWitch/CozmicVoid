@@ -58,6 +58,11 @@ Items: {
 		DisplayName: Aurorien Rock
 		Tooltip: ""
 	}
+
+	MoonlitAurorienBar: {
+		DisplayName: Moonlit Aurorien Bar
+		Tooltip: ""
+	}
 }
 
 NPCs: {

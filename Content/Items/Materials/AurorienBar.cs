@@ -5,7 +5,6 @@ using Terraria.ModLoader;
 
 namespace CozmicVoid.Content.Items.Materials
 {
-
     public class AurorienBar : ModItem
     {
 
@@ -14,7 +13,8 @@ namespace CozmicVoid.Content.Items.Materials
             // Tooltip.SetDefault("A poisonous plant which weaves its way into entities");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 100; // How many items are needed in order to research duplication of this item in Journey mode. See https://terraria.gamepedia.com/Journey_Mode/Research_list for a list of commonly used research amounts depending on item type.
         }
-        
+
+
         public override void SetDefaults()
         {
             Item.width = 20; // The item texture's width
