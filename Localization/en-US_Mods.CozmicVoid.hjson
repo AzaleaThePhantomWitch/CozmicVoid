@@ -1,4 +1,7 @@
-Tiles.CoreGemT.MapEntry: Core Gem T
+Tiles: {
+	CoreGemT.MapEntry: Core Gem T
+	AurorienRockT.MapEntry: Aurorien Rock T
+}
 
 Items: {
 	CrystallineSlasher: {
@@ -43,6 +46,16 @@ Items: {
 
 	RevengeConstruct: {
 		DisplayName: Revenge Construct
+		Tooltip: ""
+	}
+
+	AurorienBar: {
+		DisplayName: Aurorien Bar
+		Tooltip: ""
+	}
+
+	AurorienRock: {
+		DisplayName: Aurorien Rock
 		Tooltip: ""
 	}
 }
