@@ -22,7 +22,7 @@ namespace CozmicVoid.Content.Items.Materials
         {
             Lighting.AddLight(Item.Center, Color.LightBlue.ToVector3());
 
-            DrawHelper.DrawItemShine(this.Item, Color.Turquoise, Color.MediumPurple, 0.2f, 1);
+            DrawHelper.DrawItemShine2(this.Item, Color.Turquoise, Color.MediumPurple, 0.2f, 1);
 
 
             DrawHelper.DrawGlow2InWorld(this.Item, spriteBatch, ref rotation, ref scale, whoAmI, Color.Teal, Color.Pink);

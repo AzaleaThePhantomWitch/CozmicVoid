@@ -23,11 +23,13 @@ namespace CozmicVoid.Content.Tiles
             Main.tileSolid[Type] = true;
             Main.tileBlockLight[Type] = true;
 
+            Main.tileMerge[Type][TileID.SnowBlock] = true;
+            Main.tileMerge[Type][TileID.IceBlock] = true;
             LocalizedText name = CreateMapEntryName();
             // name.SetDefault("Frile Ore");
             AddMapEntry(new Color(255, 169, 0), name);
 
-            DustType = DustID.Phantasmal;
+            DustType = DustID.SnowBlock;
             HitSound = SoundID.DD2_CrystalCartImpact;
             MineResist = 1f;
             MinPick = 20;

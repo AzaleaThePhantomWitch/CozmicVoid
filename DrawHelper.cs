@@ -383,6 +383,28 @@ namespace CozmicVoid
 
             Main.spriteBatch.Draw(texture, item.Center - Main.screenPosition, null, new Color((int)(lightColorTwo.R * ColorMult), (int)(lightColorTwo.G * ColorMult), (int)(lightColorTwo.B * ColorMult), 0), Main.GlobalTimeWrappedHourly, new Vector2(256, 256), 0.17f * (2), SpriteEffects.None, 0f);
         }
+        public static void DrawItemShine2(Item item, Color lightColor, Color lightColorTwo, float ColorMult, int glowCount = 4)
+        {
+            Texture2D texture = ModContent.Request<Texture2D>("CozmicVoid/Assets/Effects/Masks/Extra_65").Value;
+            for (int i = 0; i < glowCount; i++)
+            {
+                Main.spriteBatch.Draw(texture, item.Center - Main.screenPosition, null, new Color((int)(lightColor.R * ColorMult), (int)(lightColor.G * ColorMult), (int)(lightColor.B * ColorMult), 0), Main.GlobalTimeWrappedHourly / 2, new Vector2(256, 256), 0.17f * (2), SpriteEffects.None, 0f);
+            }
+
+            Main.spriteBatch.Draw(texture, item.Center - Main.screenPosition, null, new Color((int)(lightColorTwo.R * ColorMult), (int)(lightColorTwo.G * ColorMult), (int)(lightColorTwo.B * ColorMult), 0), Main.GlobalTimeWrappedHourly, new Vector2(256, 256), 0.17f * (2), SpriteEffects.None, 0f);
+        }
+        public static void DrawItemLight(Item item, Color lightColor, Color lightColorTwo, float ColorMult, int glowCount = 4)
+        {
+            Texture2D texture = ModContent.Request<Texture2D>("CozmicVoid/Assets/Effects/Masks/DimLight").Value;
+            for (int i = 0; i < glowCount; i++)
+            {
+                Main.spriteBatch.Draw(texture, item.Center - Main.screenPosition, null, new Color((int)(lightColor.R * ColorMult), (int)(lightColor.G * ColorMult), (int)(lightColor.B * ColorMult), 0), Main.GlobalTimeWrappedHourly / 2, new Vector2(32, 32), 0.17f * (8), SpriteEffects.None, 0f);
+            }
+
+            Main.spriteBatch.Draw(texture, item.Center - Main.screenPosition, null, new Color((int)(lightColorTwo.R * ColorMult), (int)(lightColorTwo.G * ColorMult), (int)(lightColorTwo.B * ColorMult), 0), Main.GlobalTimeWrappedHourly, new Vector2(32, 32), 0.17f * (8), SpriteEffects.None, 0f);
+        }
+
+
 
 
         public static void DrawDimLight(NPC npc, Vector2 Offset, float dimLightX, float dimLightY, float dimLightZ, Color worldLightingColor, int glowCount = 4)

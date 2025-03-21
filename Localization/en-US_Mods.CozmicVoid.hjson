@@ -63,6 +63,11 @@ Items: {
 		DisplayName: Moonlit Aurorien Bar
 		Tooltip: ""
 	}
+
+	AurorasKnife: {
+		DisplayName: Auroras Knife
+		Tooltip: ""
+	}
 }
 
 NPCs: {
@@ -80,4 +85,5 @@ Projectiles: {
 	StarFlare.DisplayName: Star Flare
 	StarSculptorSwordSlash.DisplayName: Star Sculptor Sword Slash
 	SculptorStar.DisplayName: Sculptor Star
+	AurorasKniferProj.DisplayName: Auroras Knifer Proj
 }
