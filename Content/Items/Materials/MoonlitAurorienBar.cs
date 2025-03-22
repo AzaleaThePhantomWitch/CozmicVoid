@@ -6,12 +6,14 @@ using Microsoft.Xna.Framework.Graphics;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
+using CozmicVoid.Dusts;
 
 namespace CozmicVoid.Content.Items.Materials
 {
     public class MoonlitAurorienBar : ModItem
     {
-
+        bool Grounded;
+        int timer = 0;
         public override void SetStaticDefaults()
         {
             // Tooltip.SetDefault("A poisonous plant which weaves its way into entities");
@@ -40,7 +42,25 @@ namespace CozmicVoid.Content.Items.Materials
             spriteBatch.Draw(texture, new Vector2(Item.position.X - Main.screenPosition.X + Item.width * 0.5f, Item.position.Y - Main.screenPosition.Y + Item.height - texture.Height * 0.5f + 2f),
                 new Rectangle(0, 0, texture.Width, texture.Height), color, rotation, texture.Size() * 0.5f, scale, SpriteEffects.None, 0);
         }
-
+        public override bool CanPickup(Player player)
+        {
+            if (Grounded)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public override void Update(ref float gravity, ref float maxFallSpeed)
+        {
+            if(Item.velocity.Y == 0)
+            {
+                Grounded = true;
+            }
+            timer++;
+        }
         public override void SetDefaults()
         {
 
