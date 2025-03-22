@@ -68,6 +68,11 @@ Items: {
 		DisplayName: Auroras Knife
 		Tooltip: ""
 	}
+
+	SnowGlow: {
+		DisplayName: Snow Glow
+		Tooltip: ""
+	}
 }
 
 NPCs: {
@@ -86,4 +91,5 @@ Projectiles: {
 	StarSculptorSwordSlash.DisplayName: Star Sculptor Sword Slash
 	SculptorStar.DisplayName: Sculptor Star
 	AurorasKniferProj.DisplayName: Auroras Knifer Proj
+	SnowGlowProj.DisplayName: Snow Glow Proj
 }
