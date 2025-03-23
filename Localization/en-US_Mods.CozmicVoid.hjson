@@ -86,4 +86,6 @@ Projectiles: {
 	StarSculptorSwordSlash.DisplayName: Star Sculptor Sword Slash
 	SculptorStar.DisplayName: Sculptor Star
 	AurorasKniferProj.DisplayName: Auroras Knifer Proj
+	SnowflakeCore.DisplayName: Snowflake Core
+	SnowflakeSpike.DisplayName: Snowflake Spike
 }
