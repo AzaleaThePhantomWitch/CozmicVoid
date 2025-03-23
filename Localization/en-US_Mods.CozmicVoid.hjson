@@ -73,6 +73,16 @@ Items: {
 		DisplayName: Snow Glow
 		Tooltip: ""
 	}
+
+	BallOfBees: {
+		DisplayName: Ball Of Bees
+		Tooltip: ""
+	}
+
+	Pollenflace: {
+		DisplayName: Pollenflace
+		Tooltip: ""
+	}
 }
 
 NPCs: {
@@ -92,4 +102,8 @@ Projectiles: {
 	SculptorStar.DisplayName: Sculptor Star
 	AurorasKniferProj.DisplayName: Auroras Knifer Proj
 	SnowGlowProj.DisplayName: Snow Glow Proj
+	BallOfBeesProj.DisplayName: Ball Of Bees Proj
+	PollenflaceProj.DisplayName: Pollenflace Proj
+	PollenflaceSpore.DisplayName: Pollenflace Spore
+	BaseImpact.DisplayName: Base Impact
 }

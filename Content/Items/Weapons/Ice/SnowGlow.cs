@@ -20,6 +20,7 @@ using static System.Formats.Asn1.AsnWriter;
 using CozmicVoid.Dusts;
 using CozmicVoid.Systems.Players;
 using CozmicVoid.ExampleContent;
+using CozmicVoid.Assets.Impacts;
 
 namespace CozmicVoid.Content.Items.Weapons.Ice
 { 
@@ -93,6 +94,10 @@ namespace CozmicVoid.Content.Items.Weapons.Ice
         }
         public override void OnKill(int timeLeft)
         {
+
+
+
+
             Main.LocalPlayer.GetModPlayer<EffectsPlayer>().ShakeAtPosition(Projectile.Center, 700f, 20f);
             for (int i = 0; i <= 18; i++)
             {
@@ -173,6 +178,8 @@ namespace CozmicVoid.Content.Items.Weapons.Ice
             }
             if (Timer >= 90)
             {
+                Projectile.NewProjectile(Projectile.GetSource_Death(), Projectile.Center.X, Projectile.Center.Y, 0f, 0f, ModContent.ProjectileType<BaseImpact>(), Projectile.damage / 3, Projectile.knockBack, Projectile.owner, 0f, 0f);
+
                 int StarType = Main.rand.Next(0, 2);
                 if (StarType == 0)
                 {
@@ -199,7 +206,7 @@ namespace CozmicVoid.Content.Items.Weapons.Ice
 
         public override void PostDraw(Color lightColor)
         {
-            DrawHelper.DrawDimLight(Projectile, Color.BlueViolet, Color.BlueViolet, 1);
+            DrawHelper.DrawDimLight(Projectile, Color.BlueViolet, Color.BlueViolet, 7, 1);
             Color color = Color.White * 0.5f;
             Texture2D texture = (Texture2D)Mod.Assets.Request<Texture2D>("Content/Items/Weapons/Ice/SnowGlowProj");
             Main.spriteBatch.Draw(texture, new Vector2(Projectile.position.X - Main.screenPosition.X + Projectile.width * 0.5f, Projectile.position.Y - Main.screenPosition.Y + Projectile.height - texture.Height * 0.5f + 2f), new Rectangle(0, 0, texture.Width, texture.Height), color, Projectile.rotation, texture.Size() * 0.5f, Projectile.scale, SpriteEffects.None, 0);

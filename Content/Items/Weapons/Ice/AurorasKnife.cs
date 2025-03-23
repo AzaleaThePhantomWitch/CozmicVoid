@@ -19,11 +19,11 @@ using NoxusBoss.Core.Graphics.Automators;
 using static System.Formats.Asn1.AsnWriter;
 
 namespace CozmicVoid.Content.Items.Weapons.Ice
-{ 
-	// This is a basic item template.
-	// Please see tModLoader's ExampleMod for every other example:
-	// https://github.com/tModLoader/tModLoader/tree/stable/ExampleMod
-	public class AurorasKnife : ModItem
+{
+    // This is a basic item template.
+    // Please see tModLoader's ExampleMod for every other example:
+    // https://github.com/tModLoader/tModLoader/tree/stable/ExampleMod
+    public class AurorasKnife : ModItem
     {
 
 

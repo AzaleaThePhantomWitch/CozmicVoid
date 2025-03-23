@@ -29,6 +29,9 @@
 	  <Reference Include="Luminance">
 	    <HintPath>Luminance.dll</HintPath>
 	  </Reference>
+	  <Reference Include="ParticleLibrary">
+	    <HintPath>ParticleLibrary.dll</HintPath>
+	  </Reference>
 	</ItemGroup>
 
 	<!-- References -->
