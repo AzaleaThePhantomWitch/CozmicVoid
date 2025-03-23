@@ -88,7 +88,7 @@ namespace CozmicVoid.Content.NPCs.Night.StarDreamer
         }
         public override float SpawnChance(NPCSpawnInfo spawnInfo)
         {
-            if (!spawnInfo.Player.ZonePurity)
+            if (!spawnInfo.Player.ZonePurity && !Main.dayTime)
                 return 0;
             return SpawnCondition.OverworldDaySlime.Chance;
         }

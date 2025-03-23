@@ -68,6 +68,21 @@ Items: {
 		DisplayName: Auroras Knife
 		Tooltip: ""
 	}
+
+	SnowGlow: {
+		DisplayName: Snow Glow
+		Tooltip: ""
+	}
+
+	BallOfBees: {
+		DisplayName: Ball Of Bees
+		Tooltip: ""
+	}
+
+	Pollenflace: {
+		DisplayName: Pollenflace
+		Tooltip: ""
+	}
 }
 
 NPCs: {

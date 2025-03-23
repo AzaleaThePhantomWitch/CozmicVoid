@@ -361,17 +361,18 @@ namespace CozmicVoid
         /// <param name="dimLightX"></param>
         /// <param name="dimLightY"></param>
         /// <param name="dimLightZ"></param>
-        public static void DrawDimLight(Projectile projectile, float dimLightX, float dimLightY, float dimLightZ, Color worldLightingColor, Color lightColor, int glowCount = 4)
+        public static void DrawDimLight(Projectile projectile, Color worldLightingColor, Color lightColor, float Scale, int glowCount = 4)
         {
             Texture2D texture = ModContent.Request<Texture2D>("CozmicVoid/Assets/Effects/Masks/DimLight").Value;
             for (int i = 0; i < glowCount; i++)
             {
-                Main.spriteBatch.Draw(texture, projectile.Center - Main.screenPosition, null, new Color((int)(dimLightX * 1), (int)(dimLightY * 1), (int)(dimLightZ * 1), 0), projectile.rotation, new Vector2(32, 32), 0.17f * (7 + 0.6f), SpriteEffects.None, 0f);
+                Main.spriteBatch.Draw(texture, projectile.Center - Main.screenPosition, null, new Color((int)(lightColor.R * 1), (int)(lightColor.G * 1), (int)(lightColor.B * 1), 0), projectile.rotation, new Vector2(32, 32), 0.17f * (Scale + 0.6f), SpriteEffects.None, 0f);
             }
 
-            Main.spriteBatch.Draw(texture, projectile.Center - Main.screenPosition, null, new Color((int)(dimLightX * 1), (int)(dimLightY * 1), (int)(dimLightZ * 1), 0), projectile.rotation, new Vector2(32, 32), 0.07f * (7 + 0.6f), SpriteEffects.None, 0f);
+            Main.spriteBatch.Draw(texture, projectile.Center - Main.screenPosition, null, new Color((int)(lightColor.R * 1), (int)(lightColor.G * 1), (int)(lightColor.B * 1), 0), projectile.rotation, new Vector2(32, 32), 0.07f * (Scale + 0.6f), SpriteEffects.None, 0f);
             Lighting.AddLight(projectile.Center, worldLightingColor.ToVector3() * 1.0f * Main.essScale);
         }
+
 
         public static void DrawItemShine(Item item, Color lightColor, Color lightColorTwo, float ColorMult, int glowCount = 4)
         {
@@ -383,16 +384,7 @@ namespace CozmicVoid
 
             Main.spriteBatch.Draw(texture, item.Center - Main.screenPosition, null, new Color((int)(lightColorTwo.R * ColorMult), (int)(lightColorTwo.G * ColorMult), (int)(lightColorTwo.B * ColorMult), 0), Main.GlobalTimeWrappedHourly, new Vector2(256, 256), 0.17f * (2), SpriteEffects.None, 0f);
         }
-        public static void DrawItemShine2(Item item, Color lightColor, Color lightColorTwo, float ColorMult, int glowCount = 4)
-        {
-            Texture2D texture = ModContent.Request<Texture2D>("CozmicVoid/Assets/Effects/Masks/Extra_65").Value;
-            for (int i = 0; i < glowCount; i++)
-            {
-                Main.spriteBatch.Draw(texture, item.Center - Main.screenPosition, null, new Color((int)(lightColor.R * ColorMult), (int)(lightColor.G * ColorMult), (int)(lightColor.B * ColorMult), 0), Main.GlobalTimeWrappedHourly / 2, new Vector2(256, 256), 0.17f * (2), SpriteEffects.None, 0f);
-            }
 
-            Main.spriteBatch.Draw(texture, item.Center - Main.screenPosition, null, new Color((int)(lightColorTwo.R * ColorMult), (int)(lightColorTwo.G * ColorMult), (int)(lightColorTwo.B * ColorMult), 0), Main.GlobalTimeWrappedHourly, new Vector2(256, 256), 0.17f * (2), SpriteEffects.None, 0f);
-        }
         public static void DrawItemLight(Item item, Color lightColor, Color lightColorTwo, float ColorMult, int glowCount = 4)
         {
             Texture2D texture = ModContent.Request<Texture2D>("CozmicVoid/Assets/Effects/Masks/DimLight").Value;
@@ -403,6 +395,42 @@ namespace CozmicVoid
 
             Main.spriteBatch.Draw(texture, item.Center - Main.screenPosition, null, new Color((int)(lightColorTwo.R * ColorMult), (int)(lightColorTwo.G * ColorMult), (int)(lightColorTwo.B * ColorMult), 0), Main.GlobalTimeWrappedHourly, new Vector2(32, 32), 0.17f * (8), SpriteEffects.None, 0f);
         }
+
+
+
+
+
+
+
+
+
+
+
+
+        public static void DrawItemShine2(Item item, Color lightColor, Color lightColorTwo, float ColorMult, int glowCount = 4)
+        {
+            Texture2D texture = ModContent.Request<Texture2D>("CozmicVoid/Assets/Effects/Masks/Extra_65").Value;
+            for (int i = 0; i < glowCount; i++)
+            {
+                Main.spriteBatch.Draw(texture, item.Center - Main.screenPosition, null, new Color((int)(lightColor.R * ColorMult), (int)(lightColor.G * ColorMult), (int)(lightColor.B * ColorMult), 0), Main.GlobalTimeWrappedHourly / 2, new Vector2(256, 256), 0.17f * (2), SpriteEffects.None, 0f);
+            }
+
+            Main.spriteBatch.Draw(texture, item.Center - Main.screenPosition, null, new Color((int)(lightColorTwo.R * ColorMult), (int)(lightColorTwo.G * ColorMult), (int)(lightColorTwo.B * ColorMult), 0), Main.GlobalTimeWrappedHourly, new Vector2(256, 256), 0.17f * (2), SpriteEffects.None, 0f);
+        }
+
+        public static void DrawItemShine2(Projectile item, Color lightColor, Color lightColorTwo, float Size, float ColorMult, int glowCount = 4)
+        {
+            Texture2D texture = ModContent.Request<Texture2D>("CozmicVoid/Assets/Effects/Masks/Extra_65").Value;
+            for (int i = 0; i < glowCount; i++)
+            {
+                Main.spriteBatch.Draw(texture, item.Center - Main.screenPosition, null, new Color((int)(lightColor.R * ColorMult), (int)(lightColor.G * ColorMult), (int)(lightColor.B * ColorMult), 0), Main.GlobalTimeWrappedHourly / 2, new Vector2(256, 256), 0.17f * Size, SpriteEffects.None, 0f);
+            }
+
+            Main.spriteBatch.Draw(texture, item.Center - Main.screenPosition, null, new Color((int)(lightColorTwo.R * ColorMult), (int)(lightColorTwo.G * ColorMult), (int)(lightColorTwo.B * ColorMult), 0), Main.GlobalTimeWrappedHourly, new Vector2(256, 256), 0.17f * Size, SpriteEffects.None, 0f);
+        }
+
+
+
 
 
 
