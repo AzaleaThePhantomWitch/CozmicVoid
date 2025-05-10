@@ -144,10 +144,12 @@ Projectiles: {
 	StarSculptorSwordSlash.DisplayName: Star Sculptor Sword Slash
 	SculptorStar.DisplayName: Sculptor Star
 	AurorasKniferProj.DisplayName: Auroras Knifer Proj
-	SnowGlowProj.DisplayName: Snow Glow Proj
-	BallOfBeesProj.DisplayName: Ball Of Bees Proj
-	PollenflaceProj.DisplayName: Pollenflace Proj
+	SnowflakeCore.DisplayName: Snowflake Core
+	SnowflakeSpike.DisplayName: Snowflake Spike
 	PollenflaceSpore.DisplayName: Pollenflace Spore
+	PollenflaceProj.DisplayName: Pollenflace Proj
+	BallOfBeesProj.DisplayName: Ball Of Bees Proj
+	SnowGlowProj.DisplayName: Snow Glow Proj
 	BaseImpact.DisplayName: Base Impact
 	TheBramblerProj.DisplayName: The Brambler Proj
 	SmokePar.DisplayName: Smoke Par
