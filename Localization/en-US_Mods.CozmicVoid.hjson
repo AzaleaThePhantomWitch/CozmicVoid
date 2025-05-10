@@ -3,6 +3,7 @@ Tiles: {
 	AurorienRockT.MapEntry: Aurorien Rock T
 	MoonTechBrickT.MapEntry: Moon Tech Brick T
 	MoonTechScrapT.MapEntry: Moon Tech Scrap T
+	MoonTechPipeT.MapEntry: Moon Tech Pipe T
 }
 
 Items: {
@@ -109,6 +110,11 @@ Items: {
 	MoonTechScrap: {
 		DisplayName: Moon Tech Scrap
 		Tooltip: ""
+	}
+
+	MoonTechPipe: {
+		Tooltip: ""
+		DisplayName: Moon Tech Pipe
 	}
 }
 
