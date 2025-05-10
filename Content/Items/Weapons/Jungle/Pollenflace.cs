@@ -22,6 +22,7 @@ using CozmicVoid.Dusts;
 using CozmicVoid.ExampleContent;
 using CozmicVoid.Systems.Players;
 using CozmicVoid.Assets.Impacts;
+using CozmicVoid.Assets.Particles;
 
 namespace CozmicVoid.Content.Items.Weapons.Jungle
 {
@@ -102,6 +103,7 @@ namespace CozmicVoid.Content.Items.Weapons.Jungle
       
         public override void AI()
         {
+
             Projectile.velocity.Y -= Main.rand.NextFloat(0.01f, 0.03f);
             Sizee -= Main.rand.NextFloat(0.1f, 0.2f);
             if (Sizee <= 0)
@@ -157,11 +159,12 @@ namespace CozmicVoid.Content.Items.Weapons.Jungle
             Main.LocalPlayer.GetModPlayer<EffectsPlayer>().ShakeAtPosition(Projectile.Center, 700f, 10f);
             for (int i = 0; i <= 18; i++)
             {
-                Projectile.NewProjectile(Projectile.GetSource_Death(), Projectile.Center.X + Main.rand.NextFloat(-50f, 50f), Projectile.Center.Y + Main.rand.NextFloat(-50f, 50f), 0f, 0f, ModContent.ProjectileType<PollenflaceSpore>(), Projectile.damage / 3, Projectile.knockBack, Projectile.owner, 0f, 0f);
+                Projectile.NewProjectile(Projectile.GetSource_Death(), Projectile.Center.X + Main.rand.NextFloat(-50f, 50f), Projectile.Center.Y + Main.rand.NextFloat(-50f, 50f), 0f, 0f, ModContent.ProjectileType<PollenPar>(), Projectile.damage / 3, Projectile.knockBack, Projectile.owner, 0f, 0f);
                 Dust.NewDust(base.Projectile.Center, 22, 22, ModContent.DustType<TSporeDust>(), 0, 0, 100, Color.Gold, 0.5f);
             }
- 
+
         }
+
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.AddBuff(BuffID.Poisoned, 180);

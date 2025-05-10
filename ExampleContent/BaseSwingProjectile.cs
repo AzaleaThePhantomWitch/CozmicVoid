@@ -52,7 +52,6 @@ namespace CozmicVoid.ExampleContent
 
         public override bool PreDraw(ref Color lightColor)
         {
-            DrawSlashTrail();
             Texture2D texture = (Texture2D)ModContent.Request<Texture2D>(Texture);
 
             int frameHeight = texture.Height / Main.projFrames[Projectile.type];
@@ -319,40 +318,6 @@ namespace CozmicVoid.ExampleContent
             armPosition.Y += Owner.gfxOffY;
         }
 
-
-        protected virtual Color ColorFunction(float p)
-        {
-            return Color.Lerp(Color.White, Color.Blue, p);
-        }
-
-        protected virtual float WidthFunction(float p)
-        {
-            return MathHelper.Lerp(0, 48, Easing.OutExpo(p, 6));
-        }
-
-        protected virtual BaseShader ReadyShader()
-        {
-            SimpleGradientTrailShader shader = SimpleGradientTrailShader.Instance;
-
-            //Used for blending the trail colors
-            //Set it to any noise texture
-            shader.PrimaryColor = Color.LightBlue;
-            shader.SecondaryColor = Color.Blue;
-
-            //Alpha Blend/Additive
-            shader.BlendState = BlendState.Additive;
-            return shader;
-        }
-
-        private void DrawSlashTrail()
-        {
-            SpriteBatch spriteBatch = Main.spriteBatch;
-            TrailDrawer.Draw(spriteBatch,
-            _trailPoints,
-              Projectile.oldRot,
-              ColorFunction,
-              WidthFunction, ReadyShader(), offset: GetFramingSize() / 2f);
-        }
 
         public override void PostDraw(Color lightColor)
         {

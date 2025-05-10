@@ -28,7 +28,7 @@ namespace CozmicVoid.Dusts
             }
             else
             {
-                Lighting.AddLight(dust.position, dust.color.ToVector3() * 0.1f);
+
                 dust.scale *= 0.985f;
                 dust.alpha += 4;
             }
