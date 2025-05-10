@@ -3,6 +3,7 @@ Tiles: {
 	AurorienRockT.MapEntry: Aurorien Rock T
 	MoonTechBrickT.MapEntry: Moon Tech Brick T
 	MoonTechScrapT.MapEntry: Moon Tech Scrap T
+	MoonTechBrickFloorT.MapEntry: Moon Tech Brick Floor T
 }
 
 Items: {
@@ -108,6 +109,21 @@ Items: {
 
 	MoonTechScrap: {
 		DisplayName: Moon Tech Scrap
+		Tooltip: ""
+	}
+
+	MoonTechBrickFloor: {
+		DisplayName: Moon Tech Brick Floor
+		Tooltip: ""
+	}
+
+	NeoluminullCore: {
+		DisplayName: Neoluminull Core
+		Tooltip: ""
+	}
+
+	NeoluminullDataRepository: {
+		DisplayName: Neoluminull Data Repository
 		Tooltip: ""
 	}
 }
