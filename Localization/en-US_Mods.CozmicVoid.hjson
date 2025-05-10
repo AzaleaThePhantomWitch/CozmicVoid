@@ -3,7 +3,7 @@ Tiles: {
 	AurorienRockT.MapEntry: Aurorien Rock T
 	MoonTechBrickT.MapEntry: Moon Tech Brick T
 	MoonTechScrapT.MapEntry: Moon Tech Scrap T
-	MoonTechPipeT.MapEntry: Moon Tech Pipe T
+	MoonTechBrickFloorT.MapEntry: Moon Tech Brick Floor T
 }
 
 Items: {
@@ -112,9 +112,19 @@ Items: {
 		Tooltip: ""
 	}
 
-	MoonTechPipe: {
+	MoonTechBrickFloor: {
+		DisplayName: Moon Tech Brick Floor
 		Tooltip: ""
-		DisplayName: Moon Tech Pipe
+	}
+
+	NeoluminullCore: {
+		DisplayName: Neoluminull Core
+		Tooltip: ""
+	}
+
+	NeoluminullDataRepository: {
+		DisplayName: Neoluminull Data Repository
+		Tooltip: ""
 	}
 }
 
