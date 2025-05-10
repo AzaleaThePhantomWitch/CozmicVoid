@@ -124,7 +124,7 @@ namespace CozmicVoid.Content.Items.Weapons.Ice
         //  }
 
 
-        //   public override void PostDraw(Color lightColor)
+        //     public override void PostDraw(Color lightColor)
         //   {
         //      Color color = Color.White * 0.5f;
         //      Texture2D texture = (Texture2D)Mod.Assets.Request<Texture2D>("Content/Items/Weapons/Ice/AurorasKnife");

@@ -103,4 +103,9 @@ Projectiles: {
 	AurorasKniferProj.DisplayName: Auroras Knifer Proj
 	SnowflakeCore.DisplayName: Snowflake Core
 	SnowflakeSpike.DisplayName: Snowflake Spike
+	PollenflaceSpore.DisplayName: Pollenflace Spore
+	PollenflaceProj.DisplayName: Pollenflace Proj
+	BallOfBeesProj.DisplayName: Ball Of Bees Proj
+	SnowGlowProj.DisplayName: Snow Glow Proj
+	BaseImpact.DisplayName: Base Impact
 }
