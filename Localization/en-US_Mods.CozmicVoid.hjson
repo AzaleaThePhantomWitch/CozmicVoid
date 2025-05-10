@@ -4,6 +4,7 @@ Tiles: {
 	MoonTechBrickT.MapEntry: Moon Tech Brick T
 	MoonTechScrapT.MapEntry: Moon Tech Scrap T
 	MoonTechBrickFloorT.MapEntry: Moon Tech Brick Floor T
+	MoonTechPipeT.MapEntry: Moon Tech Pipe T
 }
 
 Items: {
@@ -125,6 +126,16 @@ Items: {
 	NeoluminullDataRepository: {
 		DisplayName: Neoluminull Data Repository
 		Tooltip: ""
+	}
+
+	MoonTechPipe: {
+		Tooltip: ""
+		DisplayName: Moon Tech Pipe
+	}
+
+	MoonTechLight: {
+		Tooltip: ""
+		DisplayName: Moon Tech Light
 	}
 }
 
