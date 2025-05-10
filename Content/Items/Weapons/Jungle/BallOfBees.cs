@@ -20,6 +20,8 @@ using static System.Formats.Asn1.AsnWriter;
 using CozmicVoid.Dusts;
 using CozmicVoid.Systems.Players;
 using CozmicVoid.ExampleContent;
+using CozmicVoid.Assets.Particles;
+using Microsoft.Build.Evaluation;
 
 namespace CozmicVoid.Content.Items.Weapons.Jungle
 {
@@ -98,7 +100,6 @@ namespace CozmicVoid.Content.Items.Weapons.Jungle
             for (int i = 0; i <= 18; i++)
             {
                 Main.LocalPlayer.GetModPlayer<EffectsPlayer>().ShakeAtPosition(Projectile.Center, 700f, 15f);
-                Dust.NewDust(base.Projectile.Center, 22, 22, ModContent.DustType<TSporeDust>(), 0, 0, 50, Color.Gold);
                 Dust.NewDust(base.Projectile.Center, 22, 22, ModContent.DustType<GlowDust>(), 0f, 0f, 0, Color.Yellow, 0.5f);
                 Dust.NewDust(base.Projectile.Center, 22, 22, ModContent.DustType<GlowDust>(), 0f, 0f, 0, Color.Yellow, 0.5f);
                 Dust.NewDust(base.Projectile.Center, 22, 22, ModContent.DustType<GlowDust>(), 0f, 0f, 0, Color.Yellow, 0.5f);

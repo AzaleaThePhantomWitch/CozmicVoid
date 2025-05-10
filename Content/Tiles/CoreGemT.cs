@@ -27,8 +27,8 @@ namespace CozmicVoid.Content.Tiles
             LocalizedText name = CreateMapEntryName();
             // name.SetDefault("Frile Ore");
             AddMapEntry(new Color(255, 169, 0), name);
-
-            DustType = DustID.Phantasmal;
+            Main.tileMerge[TileID.Mud][Type] = true;
+            DustType = DustID.RainbowMk2;
             HitSound = SoundID.DD2_CrystalCartImpact;
             MineResist = 1f;
             MinPick = 20;
@@ -36,7 +36,10 @@ namespace CozmicVoid.Content.Tiles
             RegisterItemDrop(ModContent.ItemType<CoreGem>());
         }
 
-
+        public override void ModifyFrameMerge(int i, int j, ref int up, ref int down, ref int left, ref int right, ref int upLeft, ref int upRight, ref int downLeft, ref int downRight)
+        {
+            WorldGen.TileMergeAttempt(-2, TileID.Mud, ref up, ref down, ref left, ref right, ref upLeft, ref upRight, ref downLeft, ref downRight);
+        }
 
 
         public override void KillTile(int i, int j, ref bool fail, ref bool effectOnly, ref bool noItem)

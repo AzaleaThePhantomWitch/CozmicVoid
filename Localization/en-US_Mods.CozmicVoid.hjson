@@ -1,6 +1,8 @@
 Tiles: {
 	CoreGemT.MapEntry: Core Gem T
 	AurorienRockT.MapEntry: Aurorien Rock T
+	MoonTechBrickT.MapEntry: Moon Tech Brick T
+	MoonTechScrapT.MapEntry: Moon Tech Scrap T
 }
 
 Items: {
@@ -83,6 +85,31 @@ Items: {
 		DisplayName: Pollenflace
 		Tooltip: ""
 	}
+
+	TheBrambler: {
+		DisplayName: The Brambler
+		Tooltip: ""
+	}
+
+	ExtremelySturdyStick: {
+		DisplayName: Extremely Sturdy Stick
+		Tooltip: ""
+	}
+
+	IronDagger: {
+		DisplayName: Iron Dagger
+		Tooltip: ""
+	}
+
+	MoonTechBrick: {
+		DisplayName: Moon Tech Brick
+		Tooltip: ""
+	}
+
+	MoonTechScrap: {
+		DisplayName: Moon Tech Scrap
+		Tooltip: ""
+	}
 }
 
 NPCs: {
@@ -108,4 +135,10 @@ Projectiles: {
 	BallOfBeesProj.DisplayName: Ball Of Bees Proj
 	SnowGlowProj.DisplayName: Snow Glow Proj
 	BaseImpact.DisplayName: Base Impact
+	TheBramblerProj.DisplayName: The Brambler Proj
+	SmokePar.DisplayName: Smoke Par
+	PollenPar.DisplayName: Pollen Par
+	ExtremelySturdyStickSlash.DisplayName: Extremely Sturdy Stick Slash
+	SmallImpact.DisplayName: Small Impact
+	IronDaggerProj.DisplayName: Iron Dagger Proj
 }

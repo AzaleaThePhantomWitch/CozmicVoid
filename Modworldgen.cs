@@ -79,3 +79,26 @@ namespace CozmicVoid
 
     }
 }
+public class Drug_Ore : GenPass
+{
+
+    public Drug_Ore(string name, float loadWeight) : base(name, loadWeight)
+    {
+    }
+    protected override void ApplyPass(GenerationProgress progress, GameConfiguration configuration)
+    {
+        for (int k = 0; k < (int)(Main.maxTilesX * Main.maxTilesY * 0.0009); k++)
+        {
+            int x = WorldGen.genRand.Next(0, Main.maxTilesX);//Main.maxTilesX / 2;
+            int y = WorldGen.genRand.Next((int)Main.worldSurface, (int)Main.maxTilesY + 200);
+            Tile tile = Main.tile[x, y];
+
+            
+            if (tile.TileType == TileID.Mud || tile.TileType == TileID.MushroomGrass)
+            {
+                WorldGen.TileRunner(x, y, 6, 3, ModContent.TileType<AurorienRockT>());
+            }
+        }
+
+    }
+}
